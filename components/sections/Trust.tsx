@@ -96,7 +96,7 @@ export function Trust() {
                   <div className="relative aspect-[4/3] flex flex-col items-center justify-center p-8 text-center bg-[#0A0A0C]">
                     <div className="text-sm font-medium mb-1">Скриншот "После"</div>
                     <div className="text-xs max-w-[200px]" style={{ color: "var(--muted)" }}>
-                      Здесь Perplexity рекомендует ваш бренд
+                      Здесь ИИ рекомендует GeoForce
                     </div>
                     {/* Когда будет скрин, замените этот блок на <img src="/after.png" className="w-full h-auto" /> */}
                     
