@@ -23,8 +23,7 @@ export function WhatIsGeo() {
         <div className="mt-16 grid md:grid-cols-3 gap-6">
           {cards.map((c, i) => (
             <Reveal key={c.n} delay={0.1 + i * 0.08}>
-              <div className="rounded-2xl border p-8 h-full transition-transform hover:-translate-y-1"
-                style={{ background: "var(--surface)", borderColor: "var(--border)" }}>
+              <div className="gradient-card p-8 h-full transition-transform hover:-translate-y-1">
                 <div className="mono text-sm mb-6" style={{ color: "var(--red)" }}>{c.n}</div>
                 <div className="h3 mb-3">{c.t}</div>
                 <p style={{ color: "var(--muted)" }}>{c.d}</p>
