@@ -13,7 +13,6 @@ import { NotPromise } from "@/components/sections/NotPromise";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
-import { SectionFade } from "@/components/SectionFade";
 
 export default function Home() {
   return (
@@ -23,18 +22,18 @@ export default function Home() {
         <Hero />
         <PlatformsMarquee />
         
-        <SectionFade><WhatIsGeo /></SectionFade>
-        <SectionFade><SeoGeoTable /></SectionFade>
-        <SectionFade><Methodology /></SectionFade>
+        <WhatIsGeo />
+        <SeoGeoTable />
+        <Methodology />
         
-        {/* Блок Services удален */}
+        {/* Блок Services скрыт */}
         
-        <SectionFade><Deliverables /></SectionFade>
-        <SectionFade><Metrics /></SectionFade>
-        <SectionFade><Trust /></SectionFade>
-        <SectionFade><WhyNow /></SectionFade>
-        <SectionFade><NotPromise /></SectionFade>
-        <SectionFade><Faq /></SectionFade>
+        <Deliverables />
+        <Metrics />
+        <Trust />
+        <WhyNow />
+        <NotPromise />
+        <Faq />
         
         <FinalCta />
       </main>
