@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ContactModalProvider } from "@/components/ContactModalProvider";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 const interTight = Inter_Tight({
   subsets: ["latin", "cyrillic"],
@@ -39,7 +40,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" className={`${interTight.variable} ${jetbrains.variable}`}>
       <body>
-        <ContactModalProvider>{children}</ContactModalProvider>
+        <SmoothScroll>
+          <ContactModalProvider>{children}</ContactModalProvider>
+        </SmoothScroll>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
