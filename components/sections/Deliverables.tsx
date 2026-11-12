@@ -21,19 +21,23 @@ export function Deliverables() {
           </p>
         </Reveal>
 
-        {/* СПИСОК-ИНДЕКС С АКЦЕНТНЫМИ МЕТРИКАМИ */}
+        {/* СПИСОК-ИНДЕКС */}
         <div className="mt-16 border-t border-white/10">
           {items.map((item, i) => (
             <Reveal key={item.t} delay={0.05 + i * 0.05}>
-              <div className="group relative flex items-center justify-between py-6 md:py-8 border-b border-white/10 transition-colors duration-500 hover:border-white/20 cursor-default">
+              <div className="group relative flex items-center justify-between py-6 md:py-8 border-b border-white/10 cursor-default">
                 
+                {/* АНИМАЦИЯ РАСТУЩЕЙ ЛИНИИ ПРИ HOVER */}
+                <div className="absolute bottom-0 left-0 h-[1px] bg-[var(--red)] w-0 transition-all duration-500 ease-out group-hover:w-full z-20 shadow-[0_0_10px_var(--red)]" />
+
                 {/* Левая часть: Номер + Заголовок + Описание */}
                 <div className="flex items-start md:items-center gap-6 md:gap-12 relative z-10 pr-4">
                   <div className="mono text-sm md:text-base transition-colors duration-300" style={{ color: "var(--muted)" }}>
                     0{i + 1}
                   </div>
                   <div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-white transition-transform duration-500 group-hover:translate-x-1">
+                    {/* Заголовок с эффектом магнита при hover */}
+                    <h3 className="text-xl md:text-2xl font-semibold text-white transition-transform duration-500 group-hover:translate-x-2">
                       {item.t}
                     </h3>
                     <p className="text-sm md:text-base mt-1 md:mt-0 transition-colors duration-300" style={{ color: "var(--muted)" }}>
@@ -45,17 +49,17 @@ export function Deliverables() {
                 {/* Правая часть: Акцентная метрика */}
                 <div className="relative z-10 flex-shrink-0 text-right">
                   <span 
-                    className="mono text-sm md:text-base font-semibold transition-all duration-500 group-hover:text-white inline-block"
+                    className="mono text-sm md:text-base font-semibold transition-colors duration-500 group-hover:text-white inline-block"
                     style={{ 
                       color: "var(--red)", 
-                      textShadow: "0 0 20px rgba(255,45,45,0.3)" // Легкое свечение
+                      textShadow: "0 0 20px rgba(255,45,45,0.3)" 
                     }}
                   >
                     {item.metric}
                   </span>
                 </div>
 
-                {/* Подсветка фона при наведении */}
+                {/* Легкая подсветка фона */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
               </div>
             </Reveal>
