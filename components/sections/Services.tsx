@@ -17,8 +17,8 @@ export function Services() {
         <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map(({ Icon, t, d }, i) => (
             <Reveal key={t} delay={0.05 + i * 0.06}>
-              <div className="group rounded-2xl border p-8 h-full transition-all hover:border-[var(--red)] hover:-translate-y-1"
-                style={{ background: "var(--surface)", borderColor: "var(--border)", color: "var(--text)" }}>
+              <div className="group gradient-card p-8 h-full transition-transform hover:-translate-y-1"
+                style={{ color: "var(--text)" }}>
                 <div className="mb-6 transition-colors group-hover:text-[var(--red)]"><Icon /></div>
                 <div className="h3 mb-3">{t}</div>
                 <p style={{ color: "var(--muted)" }}>{d}</p>
