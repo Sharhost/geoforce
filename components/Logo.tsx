@@ -7,9 +7,12 @@ export function Logo({
   variant?: "default" | "mono";
   className?: string;
 }) {
-  const textColor = variant === "mono" ? "#F5F5F7" : "#F5F5F7";
-  const dotColor = variant === "mono" ? "#F5F5F7" : "#FF2D2D";
+  const textColor = "#F5F5F7";
+  // Если вариант mono (например, для темной темы), то Geo тоже белое
+  const accentColor = variant === "mono" ? "#F5F5F7" : "var(--red)";
+  const dotColor = variant === "mono" ? "#F5F5F7" : "var(--red)";
   const dot = Math.round(size * 0.18);
+
   return (
     <span
       className={`inline-flex items-baseline gap-1 ${className}`}
@@ -21,10 +24,11 @@ export function Logo({
           fontFamily: "var(--font-inter-tight), system-ui, sans-serif",
           fontWeight: 600,
           letterSpacing: "-0.02em",
-          color: textColor,
         }}
       >
-        GeoForce
+        {/* Разделяем слово на две части для разного цвета */}
+        <span style={{ color: accentColor }}>Geo</span>
+        <span style={{ color: textColor }}>Force</span>
       </span>
       <span
         style={{
