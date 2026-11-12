@@ -21,7 +21,7 @@ export function Deliverables() {
           </p>
         </Reveal>
 
-        {/* СПИСОК-ИНДЕКС С МЕТРИКАМИ */}
+        {/* СПИСОК-ИНДЕКС С АКЦЕНТНЫМИ МЕТРИКАМИ */}
         <div className="mt-16 border-t border-white/10">
           {items.map((item, i) => (
             <Reveal key={item.t} delay={0.05 + i * 0.05}>
@@ -42,11 +42,14 @@ export function Deliverables() {
                   </div>
                 </div>
 
-                {/* Правая часть: Метрика */}
+                {/* Правая часть: Акцентная метрика */}
                 <div className="relative z-10 flex-shrink-0 text-right">
                   <span 
-                    className="mono text-sm md:text-base font-medium transition-colors duration-500 group-hover:text-[var(--red)]"
-                    style={{ color: "var(--text)" }}
+                    className="mono text-sm md:text-base font-semibold transition-all duration-500 group-hover:text-white inline-block"
+                    style={{ 
+                      color: "var(--red)", 
+                      textShadow: "0 0 20px rgba(255,45,45,0.3)" // Легкое свечение
+                    }}
                   >
                     {item.metric}
                   </span>
