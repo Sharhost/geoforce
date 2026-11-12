@@ -1,75 +1,139 @@
 "use client";
+import { AnimatePresence, motion } from "framer-motion";
+import * as React from "react";
+import { useEffect, useState } from "react";
+import { IconMail, IconTelegram } from "./icons";
 
-import { motion } from "framer-motion";
-
-const steps = [
-  ["01", "ИИ-аудит видимости", "Проверяем, как бренд представлен в ответах языковых моделей. Фиксируем исходную точку — Citation Rate и Share of Voice."],
-  ["02", "Стратегия контента", "Формируем семантическое ядро под ИИ-запросы и карту тем, на которые модель должна ссылаться на бренд."],
-  ["03", "Внедрение", "Оптимизируем материалы, добавляем структурированные данные, выстраиваем граф знаний бренда."],
-  ["04", "Мониторинг", "Отслеживаем упоминания на 7 платформах. Ежемесячный отчёт с динамикой метрик и точками роста."],
-];
-
-export function Methodology() {
+// Иконка телефона
+function IconPhone(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <section id="methodology" className="section relative">
-      <div className="container-x">
-        
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  );
+}
+
+export function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [copied, setCopied] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  const copyToClipboard = async (text: string, type: "email" | "phone") => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(type === "email" ? "Адрес скопирован" : "Номер скопирован");
+      setTimeout(() => setCopied(null), 2500);
+    } catch {}
+  };
+
+  return (
+    <AnimatePresence>
+      {open && (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-16"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         >
-          <h2 className="h2 max-w-3xl mb-4">Четыре шага до видимости в ИИ</h2>
-          <p className="text-lg max-w-2xl" style={{ color: "var(--muted)" }}>
-            Последовательный процесс: от аудита до измеримого результата.
-          </p>
-        </motion.div>
-        
-        {/* Горизонтальный список */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 relative">
-          
-          {steps.map(([n, t, d], i) => (
-            <motion.div 
-              key={n} 
-              className="relative group"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
+          <motion.div
+            role="dialog" aria-modal="true" aria-label="Обсудим ваш проект"
+            className="relative w-full max-w-md rounded-2xl border p-8"
+            style={{ background: "var(--surface)", borderColor: "var(--border)" }}
+            initial={{ y: 20, scale: 0.98, opacity: 0 }}
+            animate={{ y: 0, scale: 1, opacity: 1 }}
+            exit={{ y: 20, scale: 0.98, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors"
+              aria-label="Закрыть"
             >
-              {/* Верхняя линия (на десктопе) */}
-              <div className="hidden lg:block absolute top-[28px] left-0 w-full h-[1px] bg-white/10 transition-colors duration-300 group-hover:bg-[var(--red)]" />
-              
-              {/* Левая вертикальная линия (на мобильных) */}
-              <div className="lg:hidden absolute left-0 top-0 bottom-0 w-[1px] bg-white/10" />
-
-              <div className="pl-6 lg:pl-0 pt-0 lg:pt-16 pb-8 lg:pr-8 relative">
-                {/* Точка на линии (только десктоп) */}
-                <div className="hidden lg:flex absolute top-[24px] left-0 w-2 h-2 rounded-full bg-[var(--red)] shadow-[0_0_10px_var(--red)] z-10" />
-
-                {/* Цифра */}
-                <div 
-                  className="mono text-3xl lg:text-4xl font-semibold mb-4 transition-all duration-300 group-hover:text-white"
-                  style={{ color: "var(--red)" }}
-                >
-                  {n}
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            
+            <h3 className="h3 mb-2">Обсудим ваш проект</h3>
+            <p className="text-sm mb-6" style={{ color: "var(--muted)" }}>Ответим в течение рабочего дня.</p>
+            
+            <div className="space-y-3">
+              {/* Telegram */}
+              <a
+                href="https://t.me/geoforce"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 rounded-xl border p-4 hover:border-[var(--red)] hover:bg-white/[0.02] transition-colors group"
+                style={{ borderColor: "var(--border)" }}
+              >
+                <div className="text-white/60 group-hover:text-[var(--red)] transition-colors">
+                  <IconTelegram />
                 </div>
+                <div>
+                  <div className="font-medium">Написать в Telegram</div>
+                  <div className="text-xs" style={{ color: "var(--muted)" }}>@geoforce</div>
+                </div>
+              </a>
 
-                {/* Текст */}
-                <h3 className="text-xl font-semibold mb-3 transition-transform duration-300 group-hover:translate-x-1">
-                  {t}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                  {d}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              {/* Телефон */}
+              <a
+                href="tel:+375296347174"
+                onClick={(e) => {
+                  if (window.innerWidth > 768) {
+                    e.preventDefault();
+                    copyToClipboard("+375296347174", "phone");
+                  }
+                }}
+                className="flex items-center gap-3 rounded-xl border p-4 hover:border-[var(--red)] hover:bg-white/[0.02] transition-colors group"
+                style={{ borderColor: "var(--border)" }}
+              >
+                <div className="text-white/60 group-hover:text-[var(--red)] transition-colors">
+                  <IconPhone />
+                </div>
+                <div>
+                  <div className="font-medium">Позвонить</div>
+                  <div className="text-xs" style={{ color: "var(--muted)" }}>+375 29 634-71-74</div>
+                </div>
+              </a>
 
-      </div>
-    </section>
+              {/* Email */}
+              <button
+                onClick={() => copyToClipboard("hello@geoforce.ru", "email")}
+                className="w-full flex items-center gap-3 rounded-xl border p-4 hover:border-[var(--red)] hover:bg-white/[0.02] transition-colors text-left group"
+                style={{ borderColor: "var(--border)" }}
+              >
+                <div className="text-white/60 group-hover:text-[var(--red)] transition-colors">
+                  <IconMail />
+                </div>
+                <div>
+                  <div className="font-medium">Написать на почту</div>
+                  <div className="text-xs" style={{ color: "var(--muted)" }}>hello@geoforce.ru</div>
+                </div>
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Тост */}
+          <AnimatePresence>
+            {copied && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                className="fixed bottom-8 left-1/2 -translate-x-1/2 rounded-lg px-4 py-2 text-sm font-medium shadow-xl z-[110]"
+                style={{ background: "var(--red)", color: "white" }}
+                role="status"
+              >
+                {copied}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
