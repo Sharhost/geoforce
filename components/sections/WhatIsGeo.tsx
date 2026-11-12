@@ -28,8 +28,8 @@ export function WhatIsGeo() {
           <div className="hidden md:block absolute top-1/2 left-0 w-full h-[1px] bg-white/10 -translate-y-1/2 z-0" />
 
           {/* ШАГ 1: SEO (Прошлое) */}
-          <Reveal delay={0.2} className="relative z-10">
-            <div className="rounded-2xl p-8 h-full border border-white/5 bg-[#0c0c0e] opacity-70 hover:opacity-100 transition-opacity duration-300">
+          <Reveal delay={0.2}>
+            <div className="relative z-10 rounded-2xl p-8 h-full border border-white/5 bg-[#0c0c0e] opacity-70 hover:opacity-100 transition-opacity duration-300">
               <div className="mono text-sm mb-6" style={{ color: "var(--muted)" }}>01 / Было</div>
               <div className="text-2xl font-semibold mb-3">Поисковики</div>
               <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
@@ -39,8 +39,8 @@ export function WhatIsGeo() {
           </Reveal>
 
           {/* ШАГ 2: ИИ (Настоящее) */}
-          <Reveal delay={0.3} className="relative z-10">
-            <div className="rounded-2xl p-8 h-full border border-white/10 bg-[#151518]">
+          <Reveal delay={0.3}>
+            <div className="relative z-10 rounded-2xl p-8 h-full border border-white/10 bg-[#151518]">
               <div className="mono text-sm mb-6 text-white">02 / Стало</div>
               <div className="text-2xl font-semibold mb-3 text-white">Нейросети</div>
               <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
@@ -50,8 +50,8 @@ export function WhatIsGeo() {
           </Reveal>
 
           {/* ШАГ 3: GEO (Будущее/Решение) */}
-          <Reveal delay={0.4} className="relative z-10">
-            <div className="gradient-card p-8 h-full transition-transform hover:-translate-y-1">
+          <Reveal delay={0.4}>
+            <div className="relative z-10 gradient-card p-8 h-full transition-transform hover:-translate-y-1">
               <div className="absolute top-0 right-0 w-20 h-20 bg-[var(--red)] opacity-10 blur-[40px] rounded-full" />
               <div className="mono text-sm mb-6" style={{ color: "var(--red)" }}>03 / Решение</div>
               <div className="text-2xl font-semibold mb-3" style={{ color: "var(--red)" }}>GEO</div>
