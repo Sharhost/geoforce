@@ -20,7 +20,7 @@ export function Metrics() {
         </Reveal>
         <div className="mt-16 grid md:grid-cols-2 gap-6">
           <Reveal delay={0.1}>
-            <div className="rounded-2xl border p-8 h-full" style={{ background: "var(--surface)", borderColor: "var(--border)" }}>
+            <div className="gradient-card p-8 h-full">
               <div className="h3 mb-4">Citation Rate <span style={{ color: "var(--muted)", fontWeight: 400, fontSize: "1rem" }}>(доля цитирований)</span></div>
               <p className="mb-6" style={{ color: "var(--muted)" }}>
                 Процент ответов ИИ, в которых упоминается ваш бренд, от общего числа релевантных запросов по вашей категории.
@@ -34,7 +34,7 @@ export function Metrics() {
             </div>
           </Reveal>
           <Reveal delay={0.2}>
-            <div className="rounded-2xl border p-8 h-full" style={{ background: "var(--surface)", borderColor: "var(--border)" }}>
+            <div className="gradient-card p-8 h-full">
               <div className="h3 mb-4">Share of Voice <span style={{ color: "var(--muted)", fontWeight: 400, fontSize: "1rem" }}>(доля голоса)</span></div>
               <p className="mb-6" style={{ color: "var(--muted)" }}>
                 Доля упоминаний вашего бренда относительно всех упоминаний конкурентов в категории.
