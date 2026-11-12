@@ -24,7 +24,9 @@ export function WhyNow() {
         {/* ГРАФИК */}
         <Reveal delay={0.1}>
           <div className="mt-12 mb-16 w-full">
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-[10px] md:text-xs font-mono mb-4" style={{ color: "var(--muted)" }}>
+            
+            {/* Подписи (теперь аккуратно встают в ряд) */}
+            <div className="flex flex-wrap justify-between gap-2 text-[10px] md:text-xs font-mono mb-4" style={{ color: "var(--muted)" }}>
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[var(--red)] animate-pulse" />
                 Сейчас (низкая сложность)
@@ -32,63 +34,55 @@ export function WhyNow() {
               <span>Через год (высокая сложность)</span>
             </div>
             
-            {/* Высота графика увеличена для мобильных */}
-            <div className="relative h-44 md:h-56 w-full border-l border-b border-white/20">
+            {/* Контейнер графика */}
+            <div className="relative h-48 md:h-56 w-full border-l border-b border-white/20">
               
-              {/* 1. СТАТИЧНАЯ СЕТКА (сделали чуть заметнее) */}
+              {/* 1. СТАТИЧНАЯ СЕТКА */}
               <svg viewBox="0 0 100 40" className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
                 <line x1="0" y1="10" x2="100" y2="10" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
                 <line x1="0" y1="20" x2="100" y2="20" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
                 <line x1="0" y1="30" x2="100" y2="30" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
               </svg>
 
-              {/* 2. КРАСНЫЙ ГРАДИЕНТ ПОД ГРАФИКОМ (сделали плотнее) */}
+              {/* 2. КРАСНЫЙ ГРАДИЕНТ ПОД ГРАФИКОМ */}
               <motion.div
                 className="absolute inset-0"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 1, delay: 1.2 }}
+                transition={{ duration: 1, delay: 0.5 }}
               >
                 <svg viewBox="0 0 100 40" className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
-                  <path
-                    d="M 0 38 C 40 38, 60 25, 100 0 L 100 40 L 0 40 Z"
-                    fill="url(#gradient)"
-                  />
+                  <path d="M 0 38 C 30 38, 50 25, 100 0 L 100 40 L 0 40 Z" fill="url(#gradient)" />
                   <defs>
                     <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-                      {/* Увеличили непрозрачность с 0.2 до 0.4 */}
-                      <stop offset="0%" stopColor="var(--red)" stopOpacity="0.4" />
+                      <stop offset="0%" stopColor="var(--red)" stopOpacity="0.5" />
                       <stop offset="100%" stopColor="var(--red)" stopOpacity="0" />
                     </linearGradient>
                   </defs>
                 </svg>
               </motion.div>
 
-              {/* 3. САМА ЛИНИЯ (толще + свечение) */}
-              <motion.div
-                className="absolute inset-0"
-                initial={{ clipPath: "inset(0 100% 0 0)" }}
-                whileInView={{ clipPath: "inset(0 0% 0 0)" }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-              >
-                <svg viewBox="0 0 100 40" className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
-                  <path
-                    d="M 0 38 C 40 38, 60 25, 100 0"
-                    fill="none"
-                    stroke="var(--red)"
-                    strokeWidth="3" // Увеличили толщину линии
-                    strokeLinecap="round"
-                    vectorEffect="non-scaling-stroke"
-                    style={{ filter: "drop-shadow(0 0 6px var(--red))" }} // Добавили свечение
-                  />
-                </svg>
-              </motion.div>
+              {/* 3. САМА ЛИНИЯ (надежная анимация через pathLength) */}
+              <svg viewBox="0 0 100 40" className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
+                <motion.path
+                  d="M 0 38 C 30 38, 50 25, 100 0"
+                  fill="none"
+                  stroke="var(--red)"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  vectorEffect="non-scaling-stroke"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                  style={{ filter: "drop-shadow(0 0 8px var(--red))" }}
+                />
+              </svg>
 
               {/* 4. ТОЧКА "СЕЙЧАС" */}
               <motion.div 
-                className="absolute w-3 h-3 md:w-4 md:h-4 rounded-full bg-[var(--red)] shadow-[0_0_20px_var(--red)] -translate-x-1/2 translate-y-1/2 z-10"
+                className="absolute w-4 h-4 rounded-full bg-[var(--red)] shadow-[0_0_20px_var(--red)] -translate-x-1/2 translate-y-1/2 z-10"
                 style={{ bottom: "5%", left: "1%" }}
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
