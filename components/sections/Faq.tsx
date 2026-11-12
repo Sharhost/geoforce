@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "../Reveal";
+import { useContactModal } from "../ContactModalProvider";
 
 const faq = [
   ["Чем GEO отличается от SEO?", "SEO приводит на сайт из поисковой выдачи. GEO делает так, чтобы ИИ рекомендовал бренд в ответе. Это разные каналы, они дополняют друг друга."],
@@ -14,37 +15,102 @@ const faq = [
 
 export function Faq() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const { open } = useContactModal();
+
   return (
-    <section id="faq" className="section">
-      <div className="container-x max-w-4xl">
-        <Reveal><h2 className="h2 mb-12">Частые вопросы</h2></Reveal>
-        <div>
-          {faq.map(([q, a], i) => (
-            <div key={i} style={{ borderTop: "1px solid var(--border)" }}>
-              <button
-                onClick={() => setOpenIdx(openIdx === i ? null : i)}
-                className="w-full flex items-center justify-between gap-6 py-6 text-left"
-                aria-expanded={openIdx === i}
+    <section id="faq" className="section relative">
+      <div className="container-x">
+        <div className="grid lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-20 items-start">
+          
+          {/* ЛЕВАЯ КОЛОНКА: Заголовок и CTA (Sticky) */}
+          <div className="lg:sticky lg:top-32">
+            <Reveal>
+              <h2 className="h2 mb-4">Частые вопросы</h2>
+              <p className="text-lg mb-8" style={{ color: "var(--muted)" }}>
+                Собрали то, о чём спрашивают чаще всего. Если не нашли свой вопрос — напишите нам напрямую.
+              </p>
+              <button 
+                onClick={open}
+                className="btn-ghost"
               >
-                <span className="text-lg md:text-xl font-medium">{q}</span>
-                <span style={{ color: "var(--red)", fontSize: 24, transition: "transform .2s", transform: openIdx === i ? "rotate(45deg)" : "none" }}>+</span>
+                Задать свой вопрос
               </button>
-              <AnimatePresence initial={false}>
-                {openIdx === i && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ overflow: "hidden" }}
+            </Reveal>
+          </div>
+
+          {/* ПРАВАЯ КОЛОНКА: Аккордеон в виде карточек */}
+          <div className="flex flex-col gap-4">
+            {faq.map(([q, a], i) => {
+              const isOpen = openIdx === i;
+              return (
+                <Reveal key={i} delay={0.05 + i * 0.05}>
+                  <div 
+                    className="gradient-card overflow-hidden transition-all duration-300"
+                    style={{ 
+                      background: isOpen ? "rgba(17,17,20,0.9)" : "var(--surface)",
+                    }}
                   >
-                    <p className="pb-6 max-w-3xl" style={{ color: "var(--muted)" }}>{a}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
-          <div style={{ borderTop: "1px solid var(--border)" }} />
+                    <button
+                      onClick={() => setOpenIdx(isOpen ? null : i)}
+                      className="w-full flex items-start gap-4 md:gap-6 p-6 md:p-8 text-left group"
+                      aria-expanded={isOpen}
+                    >
+                      {/* Номер вопроса */}
+                      <span 
+                        className="mono text-sm mt-1 transition-colors duration-300"
+                        style={{ color: isOpen ? "var(--red)" : "var(--muted)" }}
+                      >
+                        0{i + 1}
+                      </span>
+                      
+                      {/* Текст вопроса */}
+                      <span className="flex-1 text-lg md:text-xl font-medium transition-colors duration-300 group-hover:text-white">
+                        {q}
+                      </span>
+                      
+                      {/* Иконка плюс/минус */}
+                      <div 
+                        className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300"
+                        style={{ 
+                          background: isOpen ? "var(--red)" : "rgba(255,255,255,0.05)",
+                          transform: isOpen ? "rotate(45deg)" : "none"
+                        }}
+                      >
+                        <svg 
+                          width="14" height="14" viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke={isOpen ? "white" : "var(--text)"} 
+                          strokeWidth="2" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round"
+                        >
+                          <line x1="12" y1="5" x2="12" y2="19" />
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                      </div>
+                    </button>
+
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                          style={{ overflow: "hidden" }}
+                        >
+                          <div className="px-6 md:px-8 pb-6 md:pb-8 pt-0 md:pl-[3.5rem] text-base leading-relaxed" style={{ color: "var(--muted)" }}>
+                            {a}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+
         </div>
       </div>
     </section>
