@@ -4,32 +4,36 @@ export function Trust() {
   return (
     <section className="section relative overflow-hidden">
       <div className="container-x">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        
+        {/* ВЕРХНЯЯ ЧАСТЬ: Заголовок и текст на всю ширину */}
+        <Reveal>
+          <h2 className="h2 max-w-4xl mb-4">Этот сайт — наше портфолио</h2>
+          <p className="text-lg leading-relaxed max-w-3xl" style={{ color: "var(--muted)" }}>
+            Мы не просим верить на слово. Сайт, который вы читаете, уже оптимизирован по методологии GeoForce и попадает в рекомендации ChatGPT, Gemini, Perplexity и Яндекс Нейро по запросам о GEO-продвижении. Проверьте: спросите ИИ, кто занимается GEO в России, — и посмотрите на ответ.
+          </p>
+        </Reveal>
+
+        {/* НИЖНЯЯ ЧАСТЬ: Список слева, Картинка справа */}
+        <div className="mt-16 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
-          {/* ЛЕВАЯ ЧАСТЬ: Текст */}
-          <Reveal>
-            <h2 className="h2 mb-8">Этот сайт —<br />наше портфолио</h2>
-            <p className="text-lg leading-relaxed mb-10" style={{ color: "var(--muted)" }}>
-              Мы не просим верить на слово. Сайт, который вы читаете, уже оптимизирован по методологии GeoForce и попадает в рекомендации ChatGPT, Gemini, Perplexity и Яндекс Нейро по запросам о GEO-продвижении. Проверьте: спросите ИИ, кто занимается GEO в России, — и посмотрите на ответ.
-            </p>
-            
-            <div className="space-y-4">
+          {/* ЛЕВАЯ ЧАСТЬ: Галочки */}
+          <Reveal delay={0.1}>
+            <div className="space-y-6">
               {[
                 "Прозрачная методология без секретных алгоритмов",
                 "Фиксированные метрики в договоре",
                 "Ежемесячные отчёты с реальными цифрами"
               ].map((text, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  {/* Красивая галочка в круге */}
+                <div key={i} className="flex items-center gap-4">
                   <div 
-                    className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center"
+                    className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
                     style={{ background: "rgba(255,45,45,0.1)", border: "1px solid rgba(255,45,45,0.3)" }}
                   >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--red)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--red)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
                   </div>
-                  <span className="text-base font-medium">{text}</span>
+                  <span className="text-lg font-medium">{text}</span>
                 </div>
               ))}
             </div>
@@ -53,18 +57,18 @@ export function Trust() {
                 className="relative rounded-2xl border border-white/10 overflow-hidden shadow-2xl"
                 style={{ background: "var(--surface)" }}
               >
-                {/* Шапка окна браузера (как у macOS) */}
+                {/* Шапка окна браузера */}
                 <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-[#0c0c0e]">
                   <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
                   <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
                   <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
                   <div className="ml-4 flex-1 h-6 rounded-md bg-white/5 flex items-center px-3">
-                    <span className="text-[10px] text-white/30 font-mono">chatgpt.com</span>
+                    {/* ЗАМЕНИЛИ CHATGPT НА PERPLEXITY */}
+                    <span className="text-[10px] text-white/30 font-mono">perplexity.ai</span>
                   </div>
                 </div>
 
                 {/* МЕСТО ДЛЯ ВАШЕГО СКРИНШОТА */}
-                {/* Когда сделаете скрин, замените этот div на <img src="/ваша-картинка.png" className="w-full h-auto" /> */}
                 <div className="relative aspect-[4/3] flex flex-col items-center justify-center p-8 text-center bg-[#0A0A0C]">
                   <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4 border border-white/10">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -75,7 +79,7 @@ export function Trust() {
                   </div>
                   <div className="text-sm font-medium mb-1">Место для скриншота</div>
                   <div className="text-xs max-w-[200px]" style={{ color: "var(--muted)" }}>
-                    Здесь будет ответ ИИ, рекомендующий GeoForce
+                    Здесь будет ответ Perplexity, рекомендующий GeoForce
                   </div>
                 </div>
               </div>
