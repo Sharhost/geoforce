@@ -76,7 +76,7 @@ export function WhyNow() {
               style={{ background: "linear-gradient(90deg, transparent, var(--red), transparent)" }}
             />
             <p className="h3 !mb-0 text-white relative z-10">
-              Лучший момент — <span style={{ color: "var(--red)" }}>до того</span>, как это стало очевидным.
+              Сейчас лучший момент — <span style={{ color: "var(--red)" }}>до того</span>, как это станет очевидным для всех.
             </p>
           </div>
         </Reveal>
