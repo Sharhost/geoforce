@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #08080A;
+  --surface: #111114;
+  --border: rgba(255,255,255,0.08);
+  --red: #FF2D2D;
+  --red-deep: #B31212;
+  --text: #F5F5F7;
+  --muted: #8A8A93;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-inter-tight), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: var(--red); color: white; }
+
+.container-x { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+@media (min-width: 768px) { .container-x { padding: 0 40px; } }
+@media (min-width: 1280px) { .container-x { padding: 0 64px; } }
+
+.mono { font-family: var(--font-jetbrains), ui-monospace, monospace; }
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.red-glow { box-shadow: 0 0 40px rgba(255,45,45,0.25); }
+
+.h-display { font-size: clamp(44px, 7vw, 112px); line-height: 1.02; letter-spacing: -0.03em; font-weight: 600; }
+.h1 { font-size: clamp(36px, 5vw, 72px); line-height: 1.05; letter-spacing: -0.025em; font-weight: 600; }
+.h2 { font-size: clamp(28px, 3.4vw, 48px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 600; }
+.h3 { font-size: clamp(20px, 2vw, 28px); line-height: 1.2; letter-spacing: -0.015em; font-weight: 600; }
+
+.section { padding: 96px 0; }
+@media (min-width: 768px) { .section { padding: 128px 0; } }
+@media (min-width: 1280px) { .section { padding: 160px 0; } }
+
+.btn-primary {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px; padding: 14px 28px; font-weight: 500;
+  background: var(--red); color: white; transition: transform .2s;
+}
+.btn-primary:hover { transform: translateY(-1px); }
+.btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px; padding: 14px 28px; font-weight: 500;
+  border: 1px solid var(--border); color: var(--text);
+  transition: border-color .2s;
+}
+.btn-ghost:hover { border-color: var(--red); }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 30s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important; scroll-behavior: auto !important;
+  }
+}
