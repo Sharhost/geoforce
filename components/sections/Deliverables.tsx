@@ -27,8 +27,11 @@ export function Deliverables() {
             <Reveal key={item.t} delay={0.05 + i * 0.05}>
               <div className="group relative flex items-center justify-between py-6 md:py-8 border-b border-white/10 cursor-default">
                 
-                {/* АНИМАЦИЯ РАСТУЩЕЙ ЛИНИИ ПРИ HOVER */}
-                <div className="absolute bottom-0 left-0 h-[1px] bg-[var(--red)] w-0 transition-all duration-500 ease-out group-hover:w-full z-20 shadow-[0_0_10px_var(--red)]" />
+                {/* АНИМАЦИЯ РАСТУЩЕЙ ЛИНИИ (Обновленная) */}
+                <div 
+                  className="absolute bottom-0 left-0 h-[1px] bg-[var(--red)] w-0 group-hover:w-full z-20 shadow-[0_0_10px_var(--red)]" 
+                  style={{ transition: "width 0.8s cubic-bezier(0.16, 1, 0.3, 1)" }} 
+                />
 
                 {/* Левая часть: Номер + Заголовок + Описание */}
                 <div className="flex items-start md:items-center gap-6 md:gap-12 relative z-10 pr-4">
@@ -36,7 +39,6 @@ export function Deliverables() {
                     0{i + 1}
                   </div>
                   <div>
-                    {/* Заголовок с эффектом магнита при hover */}
                     <h3 className="text-xl md:text-2xl font-semibold text-white transition-transform duration-500 group-hover:translate-x-2">
                       {item.t}
                     </h3>
