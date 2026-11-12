@@ -11,7 +11,7 @@ export function Footer() {
           </p>
         </div>
         <div className="flex flex-col gap-2" style={{ color: "var(--muted)" }}>
-          <a href="#services" className="hover:text-white transition-colors">Услуги</a>
+          {/* Услуги удалены */}
           <a href="#seo-vs-geo" className="hover:text-white transition-colors">Сравнение</a>
           <a href="#metrics" className="hover:text-white transition-colors">Результаты</a>
           <a href="#faq" className="hover:text-white transition-colors">Вопросы</a>
