@@ -1,18 +1,50 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useContactModal } from "../ContactModalProvider";
+import { MouseEvent } from "react";
 
 const words = "Ваш бренд в ответах искусственного интеллекта".split(" ");
 
 export function Hero() {
   const { open } = useContactModal();
+
+  // Координаты мыши для интерактивного фона
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+  const handleMouseMove = (e: MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  };
+
   return (
-    <section className="relative pt-36 md:pt-44 pb-24 md:pb-32 overflow-hidden grid-bg">
+    <section
+      onMouseMove={handleMouseMove}
+      className="relative pt-36 md:pt-44 pb-24 md:pb-32 overflow-hidden grid-bg"
+    >
+      {/* Статичный фоновый блоб (для мобилок) */}
       <div
-        className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-20 pointer-events-none"
+        className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-10 pointer-events-none md:hidden"
         style={{ background: "radial-gradient(circle, var(--red) 0%, transparent 70%)", filter: "blur(80px)" }}
       />
-      <div className="container-x relative">
+
+      {/* Интерактивный блоб, следующий за мышкой (для десктопа) */}
+      <motion.div
+        className="absolute w-[800px] h-[800px] rounded-full opacity-20 pointer-events-none hidden md:block"
+        style={{
+          background: "radial-gradient(circle, var(--red) 0%, transparent 60%)",
+          filter: "blur(100px)",
+          x: springX,
+          y: springY,
+          left: "-400px", // Центрируем относительно курсора
+          top: "-400px",
+        }}
+      />
+
+      <div className="container-x relative z-10">
         <h1 className="h-display max-w-5xl">
           {words.map((w, i) => (
             <motion.span
@@ -42,7 +74,7 @@ export function Hero() {
         </motion.div>
         <motion.div
           className="mt-16 md:mt-20 max-w-2xl rounded-2xl border p-6 md:p-8"
-          style={{ background: "var(--surface)", borderColor: "var(--border)" }}
+          style={{ background: "rgba(17,17,20,0.7)", borderColor: "var(--border)", backdropFilter: "blur(10px)" }}
           initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.3, duration: 0.7 }}
         >
           <div className="text-xs uppercase tracking-widest mb-3 mono" style={{ color: "var(--muted)" }}>Диалог с ИИ</div>
