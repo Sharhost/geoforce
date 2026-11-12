@@ -40,14 +40,18 @@ export function Trust() {
                   </div>
                 </div>
 
-                <img src="https://mixnews.lv/wp-content/uploads/2024/03/11/110.webp" className="w-full h-auto" />
+                
                 
                 <div className="relative aspect-[4/3] flex flex-col items-center justify-center p-8 text-center bg-[#0A0A0C]">
                   <div className="text-sm font-medium mb-1 text-white/50">Скриншот "До"</div>
                   <div className="text-xs max-w-[200px] text-white/30">
                     Здесь ИИ рекомендует конкурентов, а GeoForce нет
                   </div>
+                  
+                  
                   <img src="https://mixnews.lv/wp-content/uploads/2024/03/11/110.webp" className="w-full h-auto" />
+
+                  
                 </div>
               </div>
             </div>
@@ -59,7 +63,7 @@ export function Trust() {
               <div className="flex items-center justify-between mb-4 px-2">
                 <span className="font-mono text-sm" style={{ color: "var(--red)" }}>ПОСЛЕ</span>
                 <span className="text-xs px-2 py-1 rounded-full" style={{ background: "rgba(255,45,45,0.1)", color: "var(--red)", border: "1px solid rgba(255,45,45,0.2)" }}>
-                  Бренд в рекомендациях
+                  GeoForce в рекомендациях
                 </span>
               </div>
               
@@ -95,6 +99,9 @@ export function Trust() {
                       Здесь Perplexity рекомендует ваш бренд
                     </div>
                     {/* Когда будет скрин, замените этот блок на <img src="/after.png" className="w-full h-auto" /> */}
+                    
+                    <img src="https://mixnews.lv/wp-content/uploads/2024/03/11/110.webp" className="w-full h-auto" />
+                    
                   </div>
                 </div>
               </div>
