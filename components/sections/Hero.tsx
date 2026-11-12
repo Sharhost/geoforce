@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useContactModal } from "../ContactModalProvider";
 import { MouseEvent } from "react";
 
-const words = "Ваш бренд в ответах искусственного интеллекта".split(" ");
+const words = "Наш бренд в ответах искусственного интеллекта".split(" ");
 
 export function Hero() {
   const { open } = useContactModal();
