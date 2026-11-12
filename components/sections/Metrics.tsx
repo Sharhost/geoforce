@@ -1,11 +1,13 @@
 import { Reveal } from "../Reveal";
 import { Counter } from "../Counter";
+import { motion } from "framer-motion"; // Добавили импорт для анимаций
 
 const bars = [
-  { name: "[Ваш бренд]", value: 31, highlight: true },
-  { name: "Конкурент A", value: 27, highlight: false },
-  { name: "Конкурент B", value: 22, highlight: false },
-  { name: "Конкурент C", value: 20, highlight: false },
+  // Для бренда задаем начальное значение (31) и конечное (51)
+  { name: "[Ваш бренд]", value: 51, initial: 0, highlight: true },
+  { name: "Конкурент A", value: 27, initial: 0, highlight: false },
+  { name: "Конкурент B", value: 22, initial: 0, highlight: false },
+  { name: "Конкурент C", value: 20, initial: 0, highlight: false },
 ];
 
 export function Metrics() {
@@ -33,6 +35,7 @@ export function Metrics() {
               </div>
             </div>
           </Reveal>
+          
           <Reveal delay={0.2}>
             <div className="gradient-card p-8 h-full">
               <div className="h3 mb-4">Share of Voice <span style={{ color: "var(--muted)", fontWeight: 400, fontSize: "1rem" }}>(доля голоса)</span></div>
@@ -42,15 +45,35 @@ export function Metrics() {
               <div className="mono text-xs rounded p-3 mb-6" style={{ background: "rgba(255,255,255,0.03)", color: "var(--muted)" }}>
                 (упоминания бренда / все упоминания в категории) × 100%
               </div>
+              
               <div className="space-y-3">
                 {bars.map((b) => (
                   <div key={b.name}>
                     <div className="flex justify-between text-sm mb-1">
                       <span style={{ color: b.highlight ? "var(--text)" : "var(--muted)" }}>{b.name}</span>
-                      <span className="mono" style={{ color: b.highlight ? "var(--red)" : "var(--muted)" }}>{b.value}%</span>
+                      <span className="mono" style={{ color: b.highlight ? "var(--red)" : "var(--muted)" }}>
+                        {/* Если это наш бренд, используем анимированный счетчик, иначе обычный текст */}
+                        {b.highlight ? (
+                          <Counter to={b.value} suffix="%" />
+                        ) : (
+                          `${b.value}%`
+                        )}
+                      </span>
                     </div>
-                    <div className="h-1.5 rounded-full" style={{ background: "rgba(255,255,255,0.06)" }}>
-                      <div className="h-full rounded-full" style={{ width: `${b.value}%`, background: b.highlight ? "var(--red)" : "rgba(138,138,147,0.5)" }} />
+                    
+                    {/* Полоса прогресса */}
+                    <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+                      <motion.div 
+                        className="h-full rounded-full"
+                        // Анимация начинается, когда элемент появляется в зоне видимости
+                        initial={{ width: `${b.initial}%` }}
+                        whileInView={{ width: `${b.value}%` }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+                        style={{ 
+                          background: b.highlight ? "var(--red)" : "rgba(138,138,147,0.5)" 
+                        }}
+                      />
                     </div>
                   </div>
                 ))}
