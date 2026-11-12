@@ -88,7 +88,10 @@ export function Nav() {
             initial={{ opacity: 0, y: -10 }} 
             animate={{ opacity: 1, y: 0 }} 
             exit={{ opacity: 0, y: -10 }}
-            className="lg:hidden fixed inset-0 top-16 z-40 p-8 bg-[#08080A]"
+            // Жестко задаем позиционирование (от шапки до низа) и z-index
+            className="lg:hidden fixed top-16 inset-x-0 bottom-0 z-40 p-8 overflow-y-auto"
+            // ПРИНУДИТЕЛЬНО задаем фон через стили, чтобы исключить прозрачность
+            style={{ background: "#08080A" }}
           >
             <div className="flex flex-col gap-6 text-2xl mt-4">
               {links.map((l) => (
