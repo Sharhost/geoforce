@@ -1,3 +1,5 @@
+"use client";
+
 import { Reveal } from "../Reveal";
 import { Counter } from "../Counter";
 import { motion } from "framer-motion"; // Добавили импорт для анимаций
