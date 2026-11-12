@@ -117,13 +117,44 @@ body::before {
   transition: opacity 0.3s ease;
 }
 
-/* Делаем рамку ярче при наведении (если карточка имеет класс group) */
+
+/* Светящаяся градиентная рамка */
+.gradient-card {
+  position: relative;
+  border: none !important; /* Убираем стандартную рамку */
+  border-radius: 1rem;     /* 16px, как было у карточек */
+  background: var(--surface);
+  z-index: 1;
+}
+
+.gradient-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px; /* Толщина рамки */
+  /* Градиент: красный в левом верхнем углу, растворяется в темноту */
+  background: linear-gradient(
+    135deg, 
+    rgba(255, 45, 45, 0.7) 0%, 
+    rgba(255, 255, 255, 0.1) 40%, 
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+/* Делаем рамку ярче при наведении */
 .group:hover .gradient-card::before,
 .gradient-card:hover::before {
   background: linear-gradient(
     135deg, 
-    rgba(255, 45, 45, 0.9) 0%, 
-    rgba(255, 45, 45, 0.4) 40%, 
+    rgba(255, 45, 45, 1) 0%, 
+    rgba(255, 45, 45, 0.5) 40%, 
     rgba(255, 255, 255, 0.05) 100%
   );
 }
