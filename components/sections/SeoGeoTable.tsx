@@ -21,39 +21,43 @@ export function SeoGeoTable() {
           </p>
         </Reveal>
 
-        {/* ================= ДЕСКТОПНАЯ ВЕРСИЯ (ТАБЛИЦА) ================= */}
+        {/* ================= ДЕСКТОПНАЯ ВЕРСИЯ (GRID С РАЗДЕЛЕННЫМИ КОЛОНКАМИ) ================= */}
         <Reveal delay={0.1}>
-          <div className="mt-12 hidden md:block">
-            <table className="w-full text-base border-collapse">
-              <thead>
-                <tr className="text-left">
-                  <th className="py-4 pr-4 w-1/4" style={{ color: "var(--muted)", fontWeight: 500 }}>Параметр</th>
-                  <th className="py-4 px-4 w-1/3" style={{ color: "var(--muted)", fontWeight: 500 }}>SEO</th>
-                  <th className="py-4 px-4 w-5/12" style={{ color: "var(--red)", fontWeight: 600 }}>GEO</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((r, i) => (
-                  <tr key={i} style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }}>
-                    <td className="py-5 pr-4 font-medium align-top">{r[0]}</td>
-                    <td className="py-5 px-4 align-top" style={{ color: "var(--muted)" }}>{r[1]}</td>
-                    <td 
-                      className="py-5 px-4 align-top"
-                      style={{
-                        color: "var(--text)",
-                        background: "rgba(255, 45, 45, 0.04)",
-                        borderLeft: "2px solid var(--red)",
-                        borderRight: "2px solid var(--red)",
-                        borderBottom: i === rows.length - 1 ? "2px solid var(--red)" : "none",
-                        borderTop: i === 0 ? "2px solid var(--red)" : "none",
-                      }}
-                    >
-                      {r[2]}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-12 hidden md:block rounded-2xl border border-white/15 overflow-hidden">
+            
+            {/* Шапка таблицы */}
+            <div className="grid grid-cols-[1fr_1.1fr_1.4fr] bg-[#151518]">
+              <div className="p-6 font-medium border-r border-white/15" style={{ color: "var(--muted)" }}>Параметр</div>
+              <div className="p-6 font-medium border-r border-white/15" style={{ color: "var(--muted)" }}>SEO</div>
+              <div className="p-6 font-semibold" style={{ color: "var(--red)" }}>GEO</div>
+            </div>
+            
+            {/* Строки таблицы */}
+            {rows.map((r, i) => (
+              <div key={i} className="grid grid-cols-[1fr_1.1fr_1.4fr] border-t border-white/15">
+                {/* Колонка 1: Параметр (темный фон) */}
+                <div className="p-6 font-medium bg-[#0c0c0e] border-r border-white/15 flex items-center">
+                  {r[0]}
+                </div>
+                
+                {/* Колонка 2: SEO (чуть светлее, текст приглушенный) */}
+                <div className="p-6 bg-[#111114] border-r border-white/15 flex items-center" style={{ color: "var(--muted)" }}>
+                  {r[1]}
+                </div>
+                
+                {/* Колонка 3: GEO (легкий красный фон и красная левая граница) */}
+                <div 
+                  className="p-6 flex items-center"
+                  style={{ 
+                    background: "rgba(255, 45, 45, 0.04)",
+                    borderLeft: "2px solid var(--red)",
+                    color: "var(--text)"
+                  }}
+                >
+                  {r[2]}
+                </div>
+              </div>
+            ))}
           </div>
         </Reveal>
 
