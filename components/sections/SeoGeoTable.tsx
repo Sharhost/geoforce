@@ -20,8 +20,10 @@ export function SeoGeoTable() {
             Разные каналы, разные механики. Работают вместе.
           </p>
         </Reveal>
+        
+        {/* Добавили w-full и max-w-full, чтобы таблица не ломала экран на мобилках */}
         <Reveal delay={0.1}>
-          <div className="mt-12 overflow-x-auto">
+          <div className="mt-12 overflow-x-auto w-full max-w-[100vw] pb-4">
             <table className="w-full min-w-[720px] text-sm md:text-base border-collapse">
               <thead>
                 <tr className="text-left">
@@ -32,14 +34,18 @@ export function SeoGeoTable() {
               </thead>
               <tbody>
                 {rows.map((r, i) => (
-                  <tr key={i} style={{ borderTop: "1px solid var(--border)" }}>
+                  <tr key={i} style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }}> {/* Сделали границу ярче */}
                     <td className="py-5 pr-4 font-medium align-top">{r[0]}</td>
                     <td className="py-5 px-4 align-top" style={{ color: "var(--muted)" }}>{r[1]}</td>
-                    <td className="py-5 px-4 align-top rounded-lg"
+                    <td 
+                      className="py-5 px-4 align-top"
                       style={{
                         color: "var(--text)",
+                        background: "rgba(255, 45, 45, 0.04)", /* Легкий красный фон */
                         borderLeft: "2px solid var(--red)",
-                        background: "rgba(255,45,45,0.03)",
+                        borderRight: "2px solid var(--red)", /* Рамка справа */
+                        borderBottom: i === rows.length - 1 ? "2px solid var(--red)" : "none", /* Закрываем низ */
+                        borderTop: i === 0 ? "2px solid var(--red)" : "none", /* Закрываем верх */
                       }}
                     >
                       {r[2]}
