@@ -5,7 +5,7 @@ import { Logo } from "./Logo";
 import { useContactModal } from "./ContactModalProvider";
 
 const links = [
-  { href: "#services", label: "Услуги" },
+  // { href: "#services", label: "Услуги" }, <-- Удалено
   { href: "#seo-vs-geo", label: "Сравнение" },
   { href: "#methodology", label: "Методология" },
   { href: "#metrics", label: "Результаты" },
