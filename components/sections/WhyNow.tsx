@@ -14,15 +14,17 @@ export function WhyNow() {
   return (
     <section className="section relative overflow-hidden">
       <div className="container-x">
+        
+        {/* ЗАГОЛОВОК */}
         <Reveal>
           <h2 className="h2 max-w-3xl mb-4">Окно возможностей закрывается быстрее, чем кажется</h2>
           <p style={{ color: "var(--muted)" }}>Четыре причины начать в этом квартале.</p>
         </Reveal>
 
-        {/* ИНТЕРАКТИВНЫЙ ГРАФИК (Вместо старой шкалы) */}
+        {/* ГРАФИК (внутри контейнера) */}
         <Reveal delay={0.1}>
-          <div className="mt-16 mb-20 max-w-3xl relative">
-            <div className="flex justify-between text-xs font-mono mb-4 px-2" style={{ color: "var(--muted)" }}>
+          <div className="mt-12 mb-16 w-full">
+            <div className="flex justify-between text-xs font-mono mb-4" style={{ color: "var(--muted)" }}>
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[var(--red)] animate-pulse" />
                 Сейчас (низкая сложность)
@@ -30,8 +32,8 @@ export function WhyNow() {
               <span>Через год (высокая сложность)</span>
             </div>
             
-            {/* SVG График */}
-            <div className="relative h-32 w-full border-l border-b border-white/10">
+            {/* Контейнер графика */}
+            <div className="relative h-32 md:h-48 w-full border-l border-b border-white/10">
               <svg viewBox="0 0 100 40" className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
                 {/* Сетка графика */}
                 <line x1="0" y1="10" x2="100" y2="10" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
@@ -45,6 +47,7 @@ export function WhyNow() {
                   stroke="var(--red)"
                   strokeWidth="1.5"
                   strokeLinecap="round"
+                  vectorEffect="non-scaling-stroke"
                   initial={{ pathLength: 0 }}
                   whileInView={{ pathLength: 1 }}
                   viewport={{ once: true }}
@@ -70,8 +73,8 @@ export function WhyNow() {
 
               {/* Точка "Сейчас" на графике */}
               <motion.div 
-                className="absolute w-3 h-3 rounded-full bg-[var(--red)] shadow-[0_0_15px_var(--red)]"
-                style={{ bottom: "5%", left: "2%" }}
+                className="absolute w-3 h-3 md:w-4 md:h-4 rounded-full bg-[var(--red)] shadow-[0_0_15px_var(--red)] -translate-x-1/2 translate-y-1/2"
+                style={{ bottom: "5%", left: "1%" }}
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
@@ -81,13 +84,13 @@ export function WhyNow() {
               </motion.div>
             </div>
             
-            <div className="text-xs mt-3 text-center font-mono" style={{ color: "var(--muted)" }}>
+            <div className="text-xs mt-4 text-center font-mono" style={{ color: "var(--muted)" }}>
               Сложность входа в GEO
             </div>
           </div>
         </Reveal>
 
-        {/* СЕТКА КАРТОЧЕК */}
+        {/* КАРТОЧКИ */}
         <div className="grid md:grid-cols-2 gap-6">
           {points.map((p, i) => (
             <Reveal key={p.n} delay={0.2 + i * 0.1}>
@@ -104,15 +107,16 @@ export function WhyNow() {
           ))}
         </div>
 
-        {/* ФИНАЛЬНЫЙ АКЦЕНТ */}
+        {/* ФИНАЛЬНЫЙ БАННЕР */}
         <Reveal delay={0.6}>
           <div className="mt-12 rounded-2xl p-8 md:p-12 text-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(255,45,45,0.1) 0%, rgba(17,17,20,1) 100%)", border: "1px solid rgba(255,45,45,0.2)" }}>
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px]" style={{ background: "linear-gradient(90deg, transparent, var(--red), transparent)" }} />
             <p className="h3 !mb-0 text-white relative z-10">
-              Сейчас лучший момент — <span style={{ color: "var(--red)" }}>до того</span>, как это станет очевидным для всех.
+              Сейчас <span style={{ color: "var(--red)" }}>лучший момент </span>— до того, как это <span style={{ color: "var(--red)" }}>станет очевидным </span> для всех.
             </p>
           </div>
         </Reveal>
+
       </div>
     </section>
   );
