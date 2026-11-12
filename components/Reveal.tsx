@@ -7,7 +7,7 @@ export function Reveal({
   children: React.ReactNode; 
   delay?: number; 
   y?: number; 
-  className?: string; 
+  className?: string; // <-- Вот эта строчка решает проблему
 }) {
   return (
     <motion.div
