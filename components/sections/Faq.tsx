@@ -38,7 +38,7 @@ export function Faq() {
             </Reveal>
           </div>
 
-          {/* ПРАВАЯ КОЛОНКА: Аккордеон в виде карточек */}
+          {/* ПРАВАЯ КОЛОНКА: Аккордеон */}
           <div className="flex flex-col gap-4">
             {faq.map(([q, a], i) => {
               const isOpen = openIdx === i;
@@ -55,7 +55,6 @@ export function Faq() {
                       className="w-full flex items-start gap-4 md:gap-6 p-6 md:p-8 text-left group"
                       aria-expanded={isOpen}
                     >
-                      {/* Номер вопроса */}
                       <span 
                         className="mono text-sm mt-1 transition-colors duration-300"
                         style={{ color: isOpen ? "var(--red)" : "var(--muted)" }}
@@ -63,12 +62,10 @@ export function Faq() {
                         0{i + 1}
                       </span>
                       
-                      {/* Текст вопроса */}
                       <span className="flex-1 text-lg md:text-xl font-medium transition-colors duration-300 group-hover:text-white">
                         {q}
                       </span>
                       
-                      {/* Иконка плюс/минус */}
                       <div 
                         className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300"
                         style={{ 
