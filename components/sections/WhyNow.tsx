@@ -7,7 +7,13 @@ const points = [
   { n: "01", t: "Модели обучаются на текущем контенте", d: "То, что вы публикуете сейчас, попадёт в следующее поколение моделей. Позже — дольше ждать." },
   { n: "02", t: "Первые закрепляются как ответ по умолчанию", d: "Перебить уже рекомендованного конкурента в 3–4 раза дороже, чем войти первым." },
   { n: "03", t: "Рынок GEO только формируется", d: "Конкуренция за упоминания в разы ниже, чем будет через год." },
-  { n: "04", t: "Аудитория уже спрашивает ИИ", d: "Миллионы решений о покупке принимаются в чатах, а не в поиске." },
+  { 
+    n: "04", 
+    t: "Трафик из поиска падает", 
+    d: "С приходом ИИ в поисковую выдачу, кликабельность обычных сайтов упала на 30%. Клиенты получают ответ сразу и не переходят на сайты.",
+    isStat: true,
+    stat: "-30%"
+  },
 ];
 
 export function WhyNow() {
@@ -35,7 +41,7 @@ export function WhyNow() {
             
             <div className="relative h-48 md:h-56 w-full border-l border-b border-white/20">
               
-              {/* 1. СЕТКА (статичная) */}
+              {/* 1. СЕТКА */}
               <svg viewBox="0 0 100 40" className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
                 <line x1="0" y1="10" x2="100" y2="10" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
                 <line x1="0" y1="20" x2="100" y2="20" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
@@ -64,32 +70,14 @@ export function WhyNow() {
               {/* 3. ЛИНИЯ (отрисовка через clip-path) */}
               <motion.div
                 className="absolute inset-0"
-                // Анимируем обрезку: от "спрятать всё справа" до "показать всё"
                 initial={{ clipPath: "inset(0% 100% 0% 0%)" }}
                 whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 1.5, ease: "easeInOut" }}
               >
                 <svg viewBox="0 0 100 40" className="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none">
-                  {/* Слой свечения */}
-                  <path
-                    d="M 0 38 Q 40 38, 100 0"
-                    fill="none"
-                    stroke="var(--red)"
-                    strokeWidth="8"
-                    strokeLinecap="round"
-                    vectorEffect="non-scaling-stroke"
-                    style={{ filter: "blur(6px)", opacity: 0.6 }}
-                  />
-                  {/* Четкая линия */}
-                  <path
-                    d="M 0 38 Q 40 38, 100 0"
-                    fill="none"
-                    stroke="var(--red)"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    vectorEffect="non-scaling-stroke"
-                  />
+                  <path d="M 0 38 Q 40 38, 100 0" fill="none" stroke="var(--red)" strokeWidth="8" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={{ filter: "blur(6px)", opacity: 0.6 }} />
+                  <path d="M 0 38 Q 40 38, 100 0" fill="none" stroke="var(--red)" strokeWidth="2.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
                 </svg>
               </motion.div>
 
@@ -117,9 +105,15 @@ export function WhyNow() {
           {points.map((p, i) => (
             <Reveal key={p.n} delay={0.2 + i * 0.1}>
               <div className="group relative gradient-card p-8 h-full transition-transform hover:-translate-y-1 overflow-hidden">
-                <div className="absolute -right-2 -bottom-6 text-[120px] font-bold leading-none opacity-[0.03] transition-opacity duration-500 group-hover:opacity-[0.08] pointer-events-none select-none mono" style={{ color: "var(--red)" }}>
-                  {p.n}
+                
+                {/* Фоновая цифра или большой стат */}
+                <div 
+                  className={`absolute -right-2 -bottom-6 font-bold leading-none opacity-[0.03] transition-opacity duration-500 group-hover:opacity-[0.08] pointer-events-none select-none mono ${p.isStat ? 'text-[100px] md:text-[120px]' : 'text-[120px]'}`}
+                  style={{ color: p.isStat ? "rgba(255,45,45,0.15)" : "var(--red)" }}
+                >
+                  {p.isStat ? p.stat : p.n}
                 </div>
+
                 <div className="relative z-10">
                   <div className="h3 mb-3 transition-colors group-hover:text-[var(--red)]">{p.t}</div>
                   <p className="text-base leading-relaxed" style={{ color: "var(--muted)" }}>{p.d}</p>
