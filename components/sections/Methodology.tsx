@@ -24,14 +24,6 @@ const methodologyJsonLd = {
   }))
 };
 
-// === КЛАССЫ ДЛЯ ЭФФЕКТА ЛЕСЕНКИ ===
-const stairOffsets = [
-  "lg:mt-0",
-  "lg:mt-12",
-  "lg:mt-24",
-  "lg:mt-36",
-];
-
 export function Methodology() {
   return (
     <section id="methodology" className="section relative">
@@ -56,23 +48,21 @@ export function Methodology() {
           </p>
         </motion.div>
         
-        {/* Сетка карточек */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-start relative">
+        {/* РОВНАЯ СЕТКА (без лесенки) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative">
           
-          {/* Пунктирная линия на фоне (для десктопа) */}
-          <div className="hidden lg:block absolute top-1/2 left-0 w-full h-[1px] border-t border-dashed border-white/10 z-0 pointer-events-none" />
-
           {steps.map((step, i) => (
             <motion.div 
               key={step.n} 
-              className={`relative z-10 ${stairOffsets[i] || ""}`}
-              initial={{ opacity: 0, y: 60, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              className="relative z-10"
+              // Плавное проявление без сдвигов по вертикали
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ 
                 duration: 0.8, 
-                delay: 0.2 + i * 0.15, 
-                ease: [0.16, 1, 0.3, 1] 
+                delay: 0.1 + i * 0.15, 
+                ease: "easeOut" 
               }}
             >
               <div className="group relative gradient-card p-8 h-full transition-transform duration-300 hover:-translate-y-2 flex flex-col">
