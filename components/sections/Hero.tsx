@@ -102,7 +102,7 @@ export function Hero() {
               style={{ color: "var(--muted)" }}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
             >
-              Заставим нейросети рекомендовать вас клиентам — <strong className="text-white">пока конкуренты платят за клики </strong>.
+              Заставим нейросети рекомендовать вас клиентам — пока конкуренты платят за клики.
             </motion.p>
             
             <motion.div
