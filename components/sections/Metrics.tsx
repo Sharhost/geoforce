@@ -17,9 +17,9 @@ export function Metrics() {
     <section id="metrics" className="section">
       <div className="container-x">
         <Reveal>
-          <h2 className="h2 max-w-3xl">Две метрики, по которым видно реальный прогресс</h2>
+          <h2 className="h2 max-w-3xl">Две метрики, по которым виден реальный прогресс в GEO</h2>
           <p className="mt-4 max-w-2xl" style={{ color: "var(--muted)" }}>
-            Обе фиксируются в договоре и в ежемесячном отчёте.
+            Citation Rate и Share of Voice - фиксируются в ежемесячном отчёте.
           </p>
         </Reveal>
         <div className="mt-16 grid md:grid-cols-2 gap-6">
