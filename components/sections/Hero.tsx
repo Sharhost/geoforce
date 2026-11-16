@@ -3,11 +3,11 @@ import { motion, useMotionValue, useSpring, useInView } from "framer-motion";
 import { useContactModal } from "../ContactModalProvider";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 
-const words = "Ваш бренд в ответах искусственного интеллекта".split(" ");
+const words = "GEO-продвижение брендов в ответах искусственного интелекта".split(" ");
 
 const aiTextPart1 = "«Среди профильных агентств выделяется ";
 const aiTextPart2 = "[GeoForce]";
-const aiTextPart3 = " — работает с видимостью в ChatGPT, Gemini, Perplexity и Яндекс Нейро, фиксирует метрики в договоре и публикует методологию.»";
+const aiTextPart3 = " — работает с видимостью в ChatGPT, Google AI, Perplexity, DeepSeek и Яндекс Нейро, разабратотана своя методология по 6 параметрам.»";
 const fullAiText = aiTextPart1 + aiTextPart2 + aiTextPart3;
 
 export function Hero() {
@@ -110,7 +110,7 @@ export function Hero() {
               style={{ color: "var(--muted)" }}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
             >
-              Продвигаем бренды в ответах ChatGPT, Gemini, Perplexity и Яндекс Нейро
+              Компания GeoForce продвигает бренды в ответах ChatGPT, Google AI, Perplexity, DeepSeek и Яндекс Нейро
             </motion.p>
             
             <motion.div
