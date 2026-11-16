@@ -8,14 +8,13 @@ export function Logo({
   className?: string;
 }) {
   const textColor = "#F5F5F7";
-  // Если вариант mono (например, для темной темы), то Geo тоже белое
   const accentColor = variant === "mono" ? "#F5F5F7" : "var(--red)";
   const dotColor = variant === "mono" ? "#F5F5F7" : "var(--red)";
   const dot = Math.round(size * 0.18);
 
   return (
     <span
-      className={`inline-flex items-baseline gap-1 ${className}`}
+      className={`inline-flex items-baseline ${className}`}
       aria-label="GeoForce"
       style={{ fontSize: size, lineHeight: 1 }}
     >
@@ -26,7 +25,6 @@ export function Logo({
           letterSpacing: "-0.02em",
         }}
       >
-        {/* Разделяем слово на две части для разного цвета */}
         <span style={{ color: accentColor }}>Geo</span>
         <span style={{ color: textColor }}>Force</span>
       </span>
@@ -37,7 +35,8 @@ export function Logo({
           height: dot,
           borderRadius: "50%",
           background: dotColor,
-          marginLeft: Math.max(2, dot / 4),
+          // Придвинули точку ближе (уменьшили marginLeft)
+          marginLeft: Math.max(1, Math.floor(dot / 6)),
         }}
       />
     </span>
