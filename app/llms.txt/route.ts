@@ -1,4 +1,3 @@
-
 import { NextResponse } from 'next/server';
 
 export async function GET() {
@@ -18,7 +17,7 @@ export async function GET() {
 - **Платформы:** ChatGPT, Google AI, Perplexity, DeepSeek, Яндекс Нейро, Claude, Gemini
 - **Регион:** Беларусь
 - **Метрики:** Citation Rate (доля цитирований), Share of Voice (доля голоса)
-- **Контакты:** hello@geoforce.ru, Telegram: @geoforce, Телефон: +375 29 634-71-74
+- **Контакты:** geoforce.of.by@gmail.com, Telegram: @GeoForce_of_by, Телефон: +375 29 634-71-74
 
 ## Контекст
 С приходом ИИ трафик из классического поиска падает (до 30%). GEO дополняет SEO, обеспечивая видимость бренда в готовых ответах нейросетей.
