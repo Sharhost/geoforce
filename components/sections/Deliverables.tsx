@@ -1,70 +1,143 @@
-import { Reveal } from "../Reveal";
+"use client";
 
-const items = [
-  { t: "Отчёт ИИ-аудита", d: "Текущая видимость и точки роста по ИИ платформам.", metric: "4 платформы" },
-  { t: "Стратегия контента", d: "Семантическое ядро под ИИ-запросы и карта тем.", metric: "20+ запросов" },
-  { t: "Оптимизированные материалы", d: "Контент и структурированные данные, которые цитирует ИИ.", metric: "8+ в месяц" },
-  { t: "Унификация бренда", d: "Связанные сущности о бренде изо всех источников.", metric: "единая база" },
-  { t: "Ежемесячный отчёт", d: "Отчет в Excel файле с понятными параметрами", metric: "5 метрик" },
-  ];
+import { useState } from "react";
+import { motion } from "framer-motion";
 
-export function Deliverables() {
+const steps = [
+  { n: "01", t: "ИИ-аудит видимости", d: "Проверяем, как бренд представлен в ответах языковых моделей. Фиксируем исходную точку — Citation Rate и Share of Voice." },
+  { n: "02", t: "Стратегия контента", d: "Формируем семантическое ядро под ИИ-запросы и карту тем, на которые модель должна ссылаться на бренд." },
+  { n: "03", t: "Внедрение", d: "Оптимизируем материалы, добавляем структурированные данные, выстраиваем граф знаний бренда." },
+  { n: "04", t: "Мониторинг", d: "Отслеживаем упоминания на 7 платформах. Ежемесячный отчёт с динамикой метрик и точками роста." },
+];
+
+const methodologyJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Четыре шага до видимости в ИИ",
+  "description": "Последовательный процесс GEO-продвижения от аудита до измеримого результата.",
+  "step": steps.map((s, i) => ({
+    "@type": "HowToStep",
+    "position": i + 1,
+    "name": s.t,
+    "text": s.d
+  }))
+};
+
+export function Methodology() {
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
   return (
-    <section className="section relative">
+    <section id="methodology" className="section relative">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(methodologyJsonLd) }} />
+      
       <div className="container-x">
-        <Reveal>
-          <h2 className="h2 max-w-3xl mb-4">GeoForce предлагает конкретные метрики, а не абстрактные обещания</h2>
-          <p className="max-w-2xl text-lg" style={{ color: "var(--muted)" }}>
-            Каждый месяц работа превращается в осязаемые документы и параметры.
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-16"
+        >
+          <h2 className="h2 max-w-3xl mb-4">Четыре шага до видимости в ИИ</h2>
+          <p className="text-lg max-w-2xl" style={{ color: "var(--muted)" }}>
+            Наведите на карточку, чтобы увидеть этап на шкале.
           </p>
-        </Reveal>
+        </motion.div>
 
-        {/* СПИСОК-ИНДЕКС */}
-        <div className="mt-16 border-t border-white/10">
-          {items.map((item, i) => (
-            <Reveal key={item.t} delay={0.05 + i * 0.05}>
-              <div className="group relative flex items-center justify-between py-6 md:py-8 border-b border-white/10 cursor-default">
+        {/* ================= ЕДИНАЯ ШКАЛА ================= */}
+        <div className="hidden lg:grid grid-cols-4 gap-6 mb-8 relative">
+          
+          {/* Фоновая линия (серый трек) */}
+          <div className="absolute top-[9px] left-0 w-full h-1 bg-white/10 rounded-full" />
+          
+          {/* Активная линия (красное заполнение) */}
+          <div
+            className="absolute top-[9px] left-0 h-1 bg-[var(--red)] rounded-full transition-all duration-500 ease-out shadow-[0_0_10px_var(--red)]"
+            // Заполняется ровно до центра выбранной карточки
+            style={{ width: hoveredIdx !== null ? `${((hoveredIdx + 0.5) / 4) * 100}%` : "0%" }}
+          />
+
+          {steps.map((step, i) => {
+            const isFilled = hoveredIdx !== null && i <= hoveredIdx;
+            
+            return (
+              // items-center выравнивает точку и цифру ровно по центру колонки
+              <div key={step.n} className="relative z-10 flex flex-col items-center gap-3">
                 
-                {/* АНИМАЦИЯ РАСТУЩЕЙ ЛИНИИ (Обновленная) */}
+                {/* Точка на шкале */}
                 <div 
-                  className="absolute bottom-0 left-0 h-[1px] bg-[var(--red)] w-0 group-hover:w-full z-20 shadow-[0_0_10px_var(--red)]" 
-                  style={{ transition: "width 0.8s cubic-bezier(0.16, 1, 0.3, 1)" }} 
-                />
-
-                {/* Левая часть: Номер + Заголовок + Описание */}
-                <div className="flex items-start md:items-center gap-6 md:gap-12 relative z-10 pr-4">
-                  <div className="mono text-sm md:text-base transition-colors duration-300" style={{ color: "var(--muted)" }}>
-                    0{i + 1}
-                  </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-white transition-transform duration-500 group-hover:translate-x-2">
-                      {item.t}
-                    </h3>
-                    <p className="text-sm md:text-base mt-1 md:mt-0 transition-colors duration-300" style={{ color: "var(--muted)" }}>
-                      {item.d}
-                    </p>
-                  </div>
+                  className={`w-5 h-5 rounded-full border-2 bg-[#0A0A0C] flex items-center justify-center transition-colors duration-300 ${
+                    isFilled ? "border-[var(--red)]" : "border-white/20"
+                  }`}
+                >
+                  <div 
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      isFilled ? "bg-[var(--red)] shadow-[0_0_8px_var(--red)]" : "bg-transparent"
+                    }`} 
+                  />
                 </div>
-
-                {/* Правая часть: Акцентная метрика */}
-                <div className="relative z-10 flex-shrink-0 text-right">
-                  <span 
-                    className="mono text-sm md:text-base font-semibold transition-colors duration-500 group-hover:text-white inline-block"
-                    style={{ 
-                      color: "var(--red)", 
-                      textShadow: "0 0 20px rgba(255,45,45,0.3)" 
-                    }}
-                  >
-                    {item.metric}
-                  </span>
+                
+                {/* Номер (теперь ровно по центру) */}
+                <div 
+                  className={`mono text-sm font-semibold transition-colors duration-300 ${
+                    isFilled ? "text-[var(--red)]" : "text-white/40"
+                  }`}
+                >
+                  {step.n}
                 </div>
-
-                {/* Легкая подсветка фона */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
               </div>
-            </Reveal>
-          ))}
+            );
+          })}
         </div>
+
+        {/* ================= КАРТОЧКИ СНИЗУ ================= */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((step, i) => {
+            const isHovered = hoveredIdx === i;
+            
+            return (
+              <div
+                key={step.n}
+                onMouseEnter={() => setHoveredIdx(i)}
+                onMouseLeave={() => setHoveredIdx(null)}
+                className={`relative group gradient-card p-8 h-full flex flex-col overflow-hidden transition-all duration-500 cursor-pointer ${
+                  isHovered ? "bg-[#151518] -translate-y-2" : "bg-[var(--surface)] hover:-translate-y-1"
+                }`}
+              >
+                <div 
+                  className={`absolute -right-2 -top-6 text-[120px] font-bold leading-none pointer-events-none select-none mono transition-opacity duration-500 ${
+                    isHovered ? "opacity-[0.08]" : "opacity-[0.03]"
+                  }`}
+                  style={{ color: "var(--red)" }}
+                >
+                  {step.n}
+                </div>
+
+                <div className="relative z-10 flex-1">
+                  <h3 className={`text-xl font-semibold mb-3 transition-colors duration-300 ${
+                    isHovered ? "text-[var(--red)]" : "text-white"
+                  }`}>
+                    {step.t}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                    {step.d}
+                  </p>
+                </div>
+
+                {/* Нижняя полоска на карточке */}
+                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-white/5 overflow-hidden">
+                  <div 
+                    className={`h-full bg-[var(--red)] transition-all duration-500 ${
+                      isHovered ? "w-full opacity-100" : "w-0 opacity-0"
+                    }`} 
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
       </div>
     </section>
   );
