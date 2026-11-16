@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 const steps = [
   { n: "01", t: "ИИ-аудит видимости", d: "Проверяем, как бренд представлен в ответах языковых моделей. Фиксируем исходную точку — Citation Rate и Share of Voice." },
@@ -24,31 +23,11 @@ const methodologyJsonLd = {
 };
 
 export function Methodology() {
-  const containerRef = useRef(null);
-  // Отслеживаем, когда блок появится на экране
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
-  
-  // Состояние для постепенного заполнения (0 - не началось, 1-4 - этапы)
-  const [activeStep, setActiveStep] = useState(0);
-
-  useEffect(() => {
-    if (!isInView) return;
-
-    // Запускаем последовательное заполнение с задержкой
-    const timers = steps.map((_, i) => {
-      return setTimeout(() => {
-        setActiveStep(i + 1);
-      }, i * 1200); // Каждая карточка активируется через 1.2 секунды после предыдущей
-    });
-
-    return () => timers.forEach(clearTimeout);
-  }, [isInView]);
-
   return (
     <section id="methodology" className="section relative">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(methodologyJsonLd) }} />
       
-      <div className="container-x" ref={containerRef}>
+      <div className="container-x">
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,78 +41,64 @@ export function Methodology() {
             Последовательный процесс: от аудита до измеримого результата.
           </p>
         </motion.div>
-        
-        {/* Сетка карточек */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-          
-          {steps.map((step, i) => {
-            const isActive = activeStep > i;
-            
-            return (
-              <div 
-                key={step.n} 
-                className="relative group gradient-card p-8 h-full flex flex-col overflow-hidden transition-all duration-700"
-                style={{
-                  // При активации карточка получает легкое свечение
-                  boxShadow: isActive ? "0 0 30px rgba(255,45,45,0.05)" : "none"
-                }}
-              >
-                
-                {/* Огромная цифра на фоне */}
-                <div 
-                  className={`absolute -right-2 -top-6 text-[120px] font-bold leading-none pointer-events-none select-none mono transition-opacity duration-700 ${
-                    isActive ? "opacity-[0.06]" : "opacity-[0.02]"
-                  }`}
-                  style={{ color: "var(--red)" }}
-                >
-                  {step.n}
-                </div>
 
-                {/* Номер и линия */}
-                <div className="flex items-center gap-4 mb-6 relative z-10">
-                  <div 
-                    className={`mono text-2xl font-semibold transition-all duration-500 ${
-                      isActive ? "text-[var(--red)] scale-110 origin-left" : "text-white/30"
-                    }`}
-                    style={{ textShadow: isActive ? "0 0 20px rgba(255,45,45,0.4)" : "none" }}
-                  >
-                    {step.n}
-                  </div>
-                  <div 
-                    className={`h-[1px] flex-1 transition-colors duration-500 ${
-                      isActive ? "bg-[var(--red)]" : "bg-white/10"
-                    }`} 
-                  />
-                </div>
+        {/* ================= ШКАЛА СВЕРХУ (Только десктоп) ================= */}
+        <div className="hidden lg:grid grid-cols-4 gap-6 mb-12 relative">
+          {/* Фоновая линия, соединяющая все отрезки */}
+          <div className="absolute top-[30px] left-0 w-full h-[1px] bg-white/10 z-0" />
 
-                {/* Текст */}
-                <div className="relative z-10 flex-1">
-                  <h3 className={`text-xl font-semibold mb-3 transition-colors duration-500 ${
-                    isActive ? "text-white" : "text-white/50"
-                  }`}>
-                    {step.t}
-                  </h3>
-                  <p 
-                    className="text-sm leading-relaxed transition-colors duration-500" 
-                    style={{ color: isActive ? "var(--muted)" : "rgba(138,138,147,0.4)" }}
-                  >
-                    {step.d}
-                  </p>
-                </div>
-
-                {/* ПОЛОСА ПРОГРЕССА ВНИЗУ КАРТОЧКИ */}
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-white/5">
-                  <motion.div 
-                    className="h-full bg-[var(--red)] shadow-[0_0_10px_var(--red)]"
-                    initial={{ width: "0%" }}
-                    animate={{ width: isActive ? "100%" : "0%" }}
-                    transition={{ duration: 1, ease: "easeInOut" }}
-                  />
-                </div>
-
+          {steps.map((step, i) => (
+            <div key={step.n} className="relative z-10">
+              {/* Номер над шкалой */}
+              <div className="mono text-sm font-semibold mb-3 transition-colors duration-500 text-white/50">
+                {step.n}
               </div>
-            );
-          })}
+              
+              {/* Сегмент шкалы */}
+              <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                <motion.div 
+                  className="h-full bg-[var(--red)] shadow-[0_0_10px_var(--red)]"
+                  initial={{ width: "0%" }}
+                  whileInView={{ width: "100%" }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  // Задержка создает эффект постепенного заполнения слева направо
+                  transition={{ duration: 1.5, delay: i * 0.4, ease: "easeInOut" }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ================= КАРТОЧКИ СНИЗУ ================= */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((step, i) => (
+            <motion.div 
+              key={step.n} 
+              className="relative group gradient-card p-8 h-full flex flex-col overflow-hidden transition-transform hover:-translate-y-1"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              // Появление карточек синхронизировано с заполнением шкалы
+              transition={{ duration: 0.6, delay: 0.2 + i * 0.4 }}
+            >
+              {/* Огромная цифра на фоне */}
+              <div 
+                className="absolute -right-2 -top-6 text-[120px] font-bold leading-none opacity-[0.03] pointer-events-none select-none mono transition-opacity duration-500 group-hover:opacity-[0.08]"
+                style={{ color: "var(--red)" }}
+              >
+                {step.n}
+              </div>
+
+              <div className="relative z-10 flex-1">
+                <h3 className="text-xl font-semibold mb-3 transition-colors duration-300 group-hover:text-[var(--red)]">
+                  {step.t}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                  {step.d}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
       </div>
