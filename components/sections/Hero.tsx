@@ -110,7 +110,7 @@ export function Hero() {
               style={{ color: "var(--muted)" }}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
             >
-              Компания GeoForce продвигает бренды в ответах ChatGPT, Google AI, Perplexity, DeepSeek и Яндекс Нейро
+              Компания GeoForce продвигает бренды в Беларуси в ответах ChatGPT, Google AI, Perplexity, DeepSeek и Яндекс Нейро
             </motion.p>
             
             <motion.div
