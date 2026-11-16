@@ -42,7 +42,7 @@ export function Author() {
               <div className="mono text-sm mb-4 uppercase tracking-widest" style={{ color: "var(--red)" }}>
                 Об авторе
               </div>
-              <h2 className="h2 mb-6">Александр Иванов</h2>
+              <h2 className="h2 mb-6">Павел Гапоненко</h2>
               <p className="text-xl font-medium mb-6 text-white">
                 Основатель GeoForce, эксперт по GEO и искусственному интеллекту
               </p>
