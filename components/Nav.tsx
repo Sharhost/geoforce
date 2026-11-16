@@ -57,30 +57,19 @@ export function Nav() {
           
           <div className="flex items-center gap-5">
             
-            {/* ================= НОВЫЙ БЛОК С АНИМАЦИЕЙ ТЕЛЕФОНА ================= */}
+            {/* БЛОК С АНИМАЦИЕЙ ТЕЛЕФОНА */}
             <motion.a 
               href="tel:+375296347174" 
-              className="hidden md:flex items-center gap-2 text-sm font-medium relative px-3 py-2 rounded-full group"
+              className="hidden md:flex items-center gap-2 text-sm font-medium relative group"
               style={{ color: "var(--text)" }}
               initial="initial"
               whileHover="hover"
             >
-              {/* Мягкое красное свечение позади телефона */}
-              <motion.div
-                className="absolute inset-0 rounded-full bg-[var(--red)] pointer-events-none"
-                variants={{
-                  initial: { opacity: 0, scale: 0.8 },
-                  hover: { opacity: 0.15, scale: 1.1 },
-                }}
-                transition={{ duration: 0.3 }}
-                style={{ filter: "blur(8px)" }}
-              />
-
               {/* Иконка телефона (эффект "звонка") */}
               <motion.div
                 variants={{
                   initial: { rotate: 0 },
-                  hover: { rotate: [0, -15, 15, -15, 15, 0] }, // Тряска
+                  hover: { rotate: [0, -15, 15, -15, 15, 0] }, // Покачивание
                 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
                 className="relative z-10"
@@ -88,19 +77,18 @@ export function Nav() {
                 <IconPhone className="w-4 h-4 transition-colors duration-300 group-hover:text-[var(--red)]" />
               </motion.div>
 
-              {/* Текст (сдвигается вправо) */}
+              {/* Текст (сдвиг и изменение цвета) */}
               <motion.span
                 className="relative z-10"
                 variants={{
                   initial: { x: 0, color: "var(--text)" },
-                  hover: { x: 2, color: "var(--red)" },
+                  hover: { x: 3, color: "var(--red)" }, // Сдвиг вправо на 3px и покраснение
                 }}
                 transition={{ duration: 0.3 }}
               >
                 +375 29 634-71-74
               </motion.span>
             </motion.a>
-            {/* =================================================================== */}
 
             <button
               onClick={() => { setMenuOpen(false); open(); }}
