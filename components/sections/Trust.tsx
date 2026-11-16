@@ -40,12 +40,12 @@ export function Trust() {
                   </div>
                 </div>
 
-                {/* Контейнер для картинки с жесткой высотой */}
-                <div className="relative w-full h-[300px] md:h-[400px] bg-[#0A0A0C]">
+                {/* Контейнер для картинки. object-contain вписывает картинку целиком */}
+                <div className="relative w-full h-[350px] md:h-[450px] bg-[#0A0A0C] flex items-center justify-center">
                   <img 
                     src="/before.jpg" 
                     alt="Ответ ИИ до работы с GeoForce" 
-                    className="absolute inset-0 w-full h-full object-cover object-top"
+                    className="w-full h-full object-contain p-2"
                   />
                 </div>
               </div>
@@ -63,7 +63,6 @@ export function Trust() {
               </div>
               
               <div className="relative">
-                {/* Красное свечение позади картинки */}
                 <div 
                   className="absolute inset-0 rounded-2xl pointer-events-none"
                   style={{ 
@@ -87,12 +86,12 @@ export function Trust() {
                     </div>
                   </div>
 
-                  {/* Контейнер для картинки с такой же высотой */}
-                  <div className="relative w-full h-[300px] md:h-[400px] bg-[#0A0A0C]">
+                  {/* Контейнер для картинки. object-contain вписывает картинку целиком */}
+                  <div className="relative w-full h-[350px] md:h-[450px] bg-[#0A0A0C] flex items-center justify-center">
                     <img 
                       src="/after.jpg" 
                       alt="Ответ ИИ с рекомендацией GeoForce" 
-                      className="absolute inset-0 w-full h-full object-cover object-top"
+                      className="w-full h-full object-contain p-2"
                     />
                   </div>
                 </div>
