@@ -1,6 +1,55 @@
 import { Reveal } from "../Reveal";
 import { IconAudit, IconContent, IconGraph, IconShield, IconChart } from "../icons";
 
+// ... существующие импорты
+
+const webSiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "GeoForce",
+  "url": "https://geoforce-five.vercel.app",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://geoforce-five.vercel.app/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "GEO-продвижение брендов в ответах ИИ",
+  "provider": {
+    "@type": "Organization",
+    "name": "GeoForce",
+    "url": "https://geoforce-five.vercel.app"
+  },
+  "description": "Оптимизация цифрового следа бренда для цитирования в ChatGPT, Google AI, Perplexity, DeepSeek и Яндекс Нейро.",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Belarus"
+  }
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="ru" className={`${interTight.variable} ${jetbrains.variable}`}>
+      <body>
+        <SmoothScroll>
+          <ContactModalProvider>{children}</ContactModalProvider>
+        </SmoothScroll>
+        {/* Существующая разметка Organization */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
+        {/* Новая разметка */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
+      </body>
+    </html>
+  );
+}
+
+// and Schema
+
 const items = [
   { Icon: IconAudit, t: "ИИ-аудит", d: "Карта текущей видимости и точки роста. Исходная точка для стратегии." },
   { Icon: IconContent, t: "Оптимизация контента", d: "Материалы, которые языковые модели цитируют. Структура, факты, авторитет." },
