@@ -23,7 +23,7 @@ export function WhyNow() {
         
         {/* ЗАГОЛОВОК */}
         <Reveal>
-          <h2 className="h2 max-w-3xl mb-4">Четыре причины начать с GeoForce прямо сейчасОкно возможностей закрывается быстрее, чем кажется</h2>
+          <h2 className="h2 max-w-3xl mb-4">Четыре причины начать с GeoForce прямо сейчас</h2>
           <p style={{ color: "var(--muted)" }}>Окно возможностей закрывается быстрее, чем кажется.</p>
         </Reveal>
 
