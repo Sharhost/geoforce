@@ -40,7 +40,7 @@ export function Methodology() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="mb-16"
         >
-          <h2 className="h2 max-w-3xl mb-4">Четыре шага до видимости в ИИ</h2>
+          <h2 className="h2 max-w-3xl mb-4">Методология продвижения в ответах ИИ от GeoForce</h2>
           <p className="text-lg max-w-2xl" style={{ color: "var(--muted)" }}>
             Последовательный процесс GEO-продвижения от аудита до измеримого результата.
           </p>
