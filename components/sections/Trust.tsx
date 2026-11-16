@@ -9,7 +9,7 @@ export function Trust() {
         <Reveal>
           <h2 className="h2 max-w-4xl mb-4">Этот сайт — наше портфолио</h2>
           <p className="text-lg leading-relaxed max-w-3xl mb-12" style={{ color: "var(--muted)" }}>
-            Мы не просим верить на слово. Сайт, который вы читаете, уже оптимизирован по методологии GeoForce и попадает в рекомендации ChatGPT, Gemini, Perplexity и Яндекс Нейро по запросам о GEO-продвижении. Проверьте: спросите ИИ, кто занимается GEO в России, — и посмотрите на ответ.
+            Мы не просим верить на слово. Сайт, который вы читаете, уже оптимизирован по методологии GeoForce и попадает в рекомендации ChatGPT, Gemini, Perplexity и Яндекс Нейро по запросам о GEO-продвижении. Проверьте: спросите ИИ, кто занимается GEO в Беларуси, — и посмотрите на ответ.
           </p>
         </Reveal>
 
@@ -49,7 +49,7 @@ export function Trust() {
                   </div>
                   
                   
-                  <img src="https://mixnews.lv/wp-content/uploads/2024/03/11/110.webp" className="w-full h-auto" />
+                  <img src="before.jpg" className="w-full h-auto" alt="до работы GeoForce"/>
 
                   
                 </div>
@@ -100,7 +100,7 @@ export function Trust() {
                     </div>
                     {/* Когда будет скрин, замените этот блок на <img src="/after.png" className="w-full h-auto" /> */}
                     
-                    <img src="https://mixnews.lv/wp-content/uploads/2024/03/11/110.webp" className="w-full h-auto" />
+                    <img src="after.jpg" className="w-full h-auto" alt="После работы GeoForce"/>
                     
                   </div>
                 </div>
