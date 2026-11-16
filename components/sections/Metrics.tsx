@@ -6,7 +6,7 @@ import { motion } from "framer-motion"; // Добавили импорт для 
 
 const bars = [
   // Для бренда задаем начальное значение (31) и конечное (51)
-  { name: "[Ваш бренд]", value: 51, initial: 0, highlight: true },
+  { name: "[Ваш бренд]", value: 50, initial: 0, highlight: true },
   { name: "Конкурент A", value: 27, initial: 0, highlight: false },
   { name: "Конкурент B", value: 22, initial: 0, highlight: false },
   { name: "Конкурент C", value: 20, initial: 0, highlight: false },
