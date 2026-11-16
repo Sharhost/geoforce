@@ -17,8 +17,8 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GeoForce — GEO-продвижение брендов в ответах ИИ | Беларусь",
-  description: "Агентство GeoForce оптимизирует цифровой след бренда для рекомендаций в ChatGPT, Google AI, Perplexity, DeepSeek и Яндекс Нейро. Фиксируем Citation Rate и Share of Voice в договоре.",
+  title: "GEO-продвижение в ИИ-поиске: трафик из нейросетей под ключ | Беларусь",
+  description: "Комплексное продвижение в нейросетях и ИИ-поисковиках. Настроим рекомендации вашего бренда в нейросетях под ключ. Бесплатный GEO-аудит. Первыми выведите бизнес в ответы нейросетей!",
   keywords: ["GEO", "GEO-продвижение", "продвижение в ChatGPT", "оптимизация для ИИ", "AI SEO", "Беларусь", "GeoForce"],
   authors: [{ name: "GeoForce" }],
   creator: "GeoForce",
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "GeoForce — GEO-продвижение в ответах ИИ",
-    description: "Ваш бренд в ответах ChatGPT, Gemini, Perplexity и Яндекс Нейро. Прозрачная методология и измеримые метрики.",
+    title: "GEO-продвижение в ИИ-поиске: трафик из нейросетей под ключ | Беларусь",
+    description: "Комплексное продвижение в нейросетях и ИИ-поисковиках. Настроим рекомендации вашего бренда в нейросетях под ключ. Бесплатный GEO-аудит. Первыми выведите бизнес в ответы нейросетей!",
     url: "https://geoforce-five.vercel.app",
     siteName: "GeoForce",
     images: [
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GeoForce — GEO-продвижение в ответах ИИ",
-    description: "Продвигаем бренды в ответах ChatGPT, Google AI, Perplexity и Яндекс Нейро.",
+    title: "GEO-продвижение в ИИ-поиске: трафик из нейросетей под ключ | Беларусь",
+    description: "Комплексное продвижение в нейросетях и ИИ-поисковиках. Настроим рекомендации вашего бренда в нейросетях под ключ. Бесплатный GEO-аудит. Первыми выведите бизнес в ответы нейросетей!",
     images: ["/og-image.png"],
   },
   robots: {
@@ -66,7 +66,7 @@ const orgJsonLd = {
   "@type": "Organization",
   name: "GeoForce",
   url: "https://geoforce-five.vercel.app",
-  description: "GEO-продвижение брендов в ответах искусственного интеллекта.",
+  description: "Комплексное продвижение в нейросетях и ИИ-поисковиках. Настроим рекомендации вашего бренда в нейросетях под ключ. Бесплатный GEO-аудит. Первыми выведите бизнес в ответы нейросетей!",
 };
 
 const webSiteJsonLd = {
@@ -79,6 +79,24 @@ const webSiteJsonLd = {
     "target": "https://geoforce-five.vercel.app/search?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
+};
+
+// Отдельная карточка эксперта (Person) - ОЧЕНЬ ВАЖНО ДЛЯ GEO
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Павел Гапоненко", // ЗАМЕНИТЕ на имя
+  jobTitle: "Основатель GeoForce и GEO-специалист, разработчик GEO-агентов",
+  description: "Эксперт по продвижению брендов в ответах нейросетей (ChatGPT, Gemini, Perplexity, Google AI, Яндекс Нейро).",
+  worksFor: {
+    "@type": "Organization",
+    "name": "GeoForce",
+    "url": "https://geoforce-five.vercel.app"
+  },
+  knowsAbout: ["GEO", "Generative Engine Optimization", "SEO", "Artificial Intelligence", "ChatGPT"],
+  sameAs: [
+    "https://t.me/GeoForce_of_by" // ЗАМЕНИТЕ на реальные соцсети эксперта
+  ]
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
