@@ -5,7 +5,7 @@ export function Trust() {
     <section className="section relative overflow-hidden">
       <div className="container-x">
         
-        {/* ВЕРХНЯЯ ЧАСТЬ: Заголовок и текст на всю ширину */}
+        {/* ВЕРХНЯЯ ЧАСТЬ: Заголовок и текст */}
         <Reveal>
           <h2 className="h2 max-w-4xl mb-4">Этот сайт — наше портфолио</h2>
           <p className="text-lg leading-relaxed max-w-3xl mb-12" style={{ color: "var(--muted)" }}>
@@ -16,7 +16,7 @@ export function Trust() {
         {/* НИЖНЯЯ ЧАСТЬ: Сравнение ДО и ПОСЛЕ */}
         <div className="mt-12 grid md:grid-cols-2 gap-8 lg:gap-12">
           
-          {/* КАРТОЧКА 1: ДО (Бренда нет) */}
+          {/* КАРТОЧКА 1: ДО */}
           <Reveal delay={0.1}>
             <div className="flex flex-col">
               <div className="flex items-center justify-between mb-4 px-2">
@@ -40,24 +40,19 @@ export function Trust() {
                   </div>
                 </div>
 
-                
-                
-                <div className="relative aspect-[4/3] flex flex-col items-center justify-center p-8 text-center bg-[#0A0A0C]">
-                  <div className="text-sm font-medium mb-1 text-white/50">Скриншот "До"</div>
-                  <div className="text-xs max-w-[200px] text-white/30">
-                    Здесь ИИ рекомендует конкурентов, а GeoForce нет
-                  </div>
-                  
-                  
-                  <img src="before.jpg" className="w-full h-auto" alt="до работы GeoForce"/>
-
-                  
+                {/* Контейнер для картинки с жесткой высотой */}
+                <div className="relative w-full h-[300px] md:h-[400px] bg-[#0A0A0C]">
+                  <img 
+                    src="/before.jpg" 
+                    alt="Ответ ИИ до работы с GeoForce" 
+                    className="absolute inset-0 w-full h-full object-cover object-top"
+                  />
                 </div>
               </div>
             </div>
           </Reveal>
 
-          {/* КАРТОЧКА 2: ПОСЛЕ (GeoForce в рекомендациях) */}
+          {/* КАРТОЧКА 2: ПОСЛЕ */}
           <Reveal delay={0.2}>
             <div className="flex flex-col">
               <div className="flex items-center justify-between mb-4 px-2">
@@ -92,16 +87,13 @@ export function Trust() {
                     </div>
                   </div>
 
-                  {/* МЕСТО ДЛЯ ВАШЕГО СКРИНШОТА "ПОСЛЕ" */}
-                  <div className="relative aspect-[4/3] flex flex-col items-center justify-center p-8 text-center bg-[#0A0A0C]">
-                    <div className="text-sm font-medium mb-1">Скриншот "После"</div>
-                    <div className="text-xs max-w-[200px]" style={{ color: "var(--muted)" }}>
-                      Здесь ИИ рекомендует GeoForce
-                    </div>
-                    {/* Когда будет скрин, замените этот блок на <img src="/after.png" className="w-full h-auto" /> */}
-                    
-                    <img src="after.jpg" className="w-full h-auto" alt="После работы GeoForce"/>
-                    
+                  {/* Контейнер для картинки с такой же высотой */}
+                  <div className="relative w-full h-[300px] md:h-[400px] bg-[#0A0A0C]">
+                    <img 
+                      src="/after.jpg" 
+                      alt="Ответ ИИ с рекомендацией GeoForce" 
+                      className="absolute inset-0 w-full h-full object-cover object-top"
+                    />
                   </div>
                 </div>
               </div>
