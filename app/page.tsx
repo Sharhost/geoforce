@@ -21,20 +21,15 @@ export default function Home() {
       <main>
         <Hero />
         <PlatformsMarquee />
-        
         <WhatIsGeo />
         <SeoGeoTable />
         <Methodology />
-        
-        {/* Блок Services скрыт */}
-        
         <Deliverables />
         <Metrics />
         <Trust />
         <WhyNow />
         <NotPromise />
         <Faq />
-        
         <FinalCta />
       </main>
       <Footer />
