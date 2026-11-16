@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 const steps = [
   { n: "01", t: "ИИ-аудит видимости", d: "Проверяем, как бренд представлен в ответах языковых моделей. Фиксируем исходную точку — Citation Rate и Share of Voice." },
@@ -24,189 +24,119 @@ const methodologyJsonLd = {
 };
 
 export function Methodology() {
-  const [activeIdx, setActiveIdx] = useState<number>(0);
+  const containerRef = useRef(null);
+  // Отслеживаем, когда блок появится на экране
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  
+  // Состояние для постепенного заполнения (0 - не началось, 1-4 - этапы)
+  const [activeStep, setActiveStep] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    // Запускаем последовательное заполнение с задержкой
+    const timers = steps.map((_, i) => {
+      return setTimeout(() => {
+        setActiveStep(i + 1);
+      }, i * 1200); // Каждая карточка активируется через 1.2 секунды после предыдущей
+    });
+
+    return () => timers.forEach(clearTimeout);
+  }, [isInView]);
 
   return (
-    <section id="methodology" className="section relative overflow-hidden">
+    <section id="methodology" className="section relative">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(methodologyJsonLd) }} />
       
-      <div className="container-x">
+      <div className="container-x" ref={containerRef}>
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h2 className="h2 mb-4">Архитектура внедрения</h2>
-          <p className="text-lg max-w-2xl mx-auto" style={{ color: "var(--muted)" }}>
-            Как мы связываем ваш бренд с нейросетями на уровне данных.
+          <h2 className="h2 max-w-3xl mb-4">Четыре шага до видимости в ИИ</h2>
+          <p className="text-lg max-w-2xl" style={{ color: "var(--muted)" }}>
+            Последовательный процесс: от аудита до измеримого результата.
           </p>
         </motion.div>
-
-        {/* ДЕСКТОПНАЯ ВЕРСИЯ (Нейросеть) */}
-        <div className="hidden lg:block relative w-full max-w-5xl mx-auto h-[600px]">
+        
+        {/* Сетка карточек */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
           
-          {/* Фоновые линии (SVG) */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1000 600" preserveAspectRatio="none">
-            {/* Линия 01-02 */}
-            <motion.path 
-              d="M 250 150 Q 500 100 750 150" 
-              fill="none" 
-              stroke={activeIdx === 0 || activeIdx === 1 ? "var(--red)" : "rgba(255,255,255,0.1)"} 
-              strokeWidth="2" 
-              className="transition-colors duration-500"
-            />
-            {/* Линия 02-03 */}
-            <motion.path 
-              d="M 750 150 Q 800 300 750 450" 
-              fill="none" 
-              stroke={activeIdx === 1 || activeIdx === 2 ? "var(--red)" : "rgba(255,255,255,0.1)"} 
-              strokeWidth="2" 
-              className="transition-colors duration-500"
-            />
-            {/* Линия 03-04 */}
-            <motion.path 
-              d="M 750 450 Q 500 500 250 450" 
-              fill="none" 
-              stroke={activeIdx === 2 || activeIdx === 3 ? "var(--red)" : "rgba(255,255,255,0.1)"} 
-              strokeWidth="2" 
-              className="transition-colors duration-500"
-            />
-            {/* Линия 04-01 */}
-            <motion.path 
-              d="M 250 450 Q 200 300 250 150" 
-              fill="none" 
-              stroke={activeIdx === 3 || activeIdx === 0 ? "var(--red)" : "rgba(255,255,255,0.1)"} 
-              strokeWidth="2" 
-              className="transition-colors duration-500"
-            />
-            {/* Центральные пересечения */}
-            <motion.path 
-              d="M 250 150 L 750 450" 
-              fill="none" 
-              stroke={activeIdx === 0 || activeIdx === 2 ? "rgba(255,45,45,0.3)" : "rgba(255,255,255,0.03)"} 
-              strokeWidth="1" 
-              strokeDasharray="4 4"
-              className="transition-colors duration-500"
-            />
-            <motion.path 
-              d="M 750 150 L 250 450" 
-              fill="none" 
-              stroke={activeIdx === 1 || activeIdx === 3 ? "rgba(255,45,45,0.3)" : "rgba(255,255,255,0.03)"} 
-              strokeWidth="1" 
-              strokeDasharray="4 4"
-              className="transition-colors duration-500"
-            />
-          </svg>
+          {steps.map((step, i) => {
+            const isActive = activeStep > i;
+            
+            return (
+              <div 
+                key={step.n} 
+                className="relative group gradient-card p-8 h-full flex flex-col overflow-hidden transition-all duration-700"
+                style={{
+                  // При активации карточка получает легкое свечение
+                  boxShadow: isActive ? "0 0 30px rgba(255,45,45,0.05)" : "none"
+                }}
+              >
+                
+                {/* Огромная цифра на фоне */}
+                <div 
+                  className={`absolute -right-2 -top-6 text-[120px] font-bold leading-none pointer-events-none select-none mono transition-opacity duration-700 ${
+                    isActive ? "opacity-[0.06]" : "opacity-[0.02]"
+                  }`}
+                  style={{ color: "var(--red)" }}
+                >
+                  {step.n}
+                </div>
 
-          {/* Узлы (Ноды) */}
-          
-          {/* Нод 1 (Верхний левый) */}
-          <Node 
-            step={steps[0]} 
-            isActive={activeIdx === 0} 
-            onClick={() => setActiveIdx(0)} 
-            className="absolute top-[5%] left-[10%]" 
-            align="right"
-          />
-          
-          {/* Нод 2 (Верхний правый) */}
-          <Node 
-            step={steps[1]} 
-            isActive={activeIdx === 1} 
-            onClick={() => setActiveIdx(1)} 
-            className="absolute top-[5%] right-[10%]" 
-            align="left"
-          />
+                {/* Номер и линия */}
+                <div className="flex items-center gap-4 mb-6 relative z-10">
+                  <div 
+                    className={`mono text-2xl font-semibold transition-all duration-500 ${
+                      isActive ? "text-[var(--red)] scale-110 origin-left" : "text-white/30"
+                    }`}
+                    style={{ textShadow: isActive ? "0 0 20px rgba(255,45,45,0.4)" : "none" }}
+                  >
+                    {step.n}
+                  </div>
+                  <div 
+                    className={`h-[1px] flex-1 transition-colors duration-500 ${
+                      isActive ? "bg-[var(--red)]" : "bg-white/10"
+                    }`} 
+                  />
+                </div>
 
-          {/* Нод 3 (Нижний правый) */}
-          <Node 
-            step={steps[2]} 
-            isActive={activeIdx === 2} 
-            onClick={() => setActiveIdx(2)} 
-            className="absolute bottom-[5%] right-[10%]" 
-            align="left"
-          />
+                {/* Текст */}
+                <div className="relative z-10 flex-1">
+                  <h3 className={`text-xl font-semibold mb-3 transition-colors duration-500 ${
+                    isActive ? "text-white" : "text-white/50"
+                  }`}>
+                    {step.t}
+                  </h3>
+                  <p 
+                    className="text-sm leading-relaxed transition-colors duration-500" 
+                    style={{ color: isActive ? "var(--muted)" : "rgba(138,138,147,0.4)" }}
+                  >
+                    {step.d}
+                  </p>
+                </div>
 
-          {/* Нод 4 (Нижний левый) */}
-          <Node 
-            step={steps[3]} 
-            isActive={activeIdx === 3} 
-            onClick={() => setActiveIdx(3)} 
-            className="absolute bottom-[5%] left-[10%]" 
-            align="right"
-          />
+                {/* ПОЛОСА ПРОГРЕССА ВНИЗУ КАРТОЧКИ */}
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-white/5">
+                  <motion.div 
+                    className="h-full bg-[var(--red)] shadow-[0_0_10px_var(--red)]"
+                    initial={{ width: "0%" }}
+                    animate={{ width: isActive ? "100%" : "0%" }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                  />
+                </div>
 
-          {/* Центральное ядро */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-10 pointer-events-none">
-            <div className="w-24 h-24 rounded-full bg-[#0A0A0C] border border-[var(--red)] shadow-[0_0_40px_rgba(255,45,45,0.2)] flex items-center justify-center relative">
-              <div className="absolute inset-0 rounded-full border border-[var(--red)] opacity-50 animate-ping" style={{ animationDuration: '3s' }} />
-              <span className="mono text-sm font-bold text-white">AI</span>
-            </div>
-          </div>
-        </div>
-
-        {/* МОБИЛЬНАЯ ВЕРСИЯ (Вертикальный таймлайн) */}
-        <div className="lg:hidden relative border-l border-white/10 ml-4 space-y-8 pb-4">
-          {steps.map((step, i) => (
-            <motion.div 
-              key={step.n}
-              className="relative pl-8"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.15 }}
-            >
-              <div className="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-[#0A0A0C] border-2 border-[var(--red)] -translate-x-[6.5px] shadow-[0_0_10px_var(--red)]" />
-              <div className="mono text-sm font-semibold mb-1" style={{ color: "var(--red)" }}>{step.n} / ЭТАП</div>
-              <h3 className="text-xl font-semibold mb-2">{step.t}</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>{step.d}</p>
-            </motion.div>
-          ))}
+              </div>
+            );
+          })}
         </div>
 
       </div>
     </section>
-  );
-}
-
-// Компонент узла (Нода)
-function Node({ step, isActive, onClick, className, align }: { step: any, isActive: boolean, onClick: () => void, className: string, align: 'left' | 'right' }) {
-  return (
-    <motion.div 
-      className={`absolute z-20 cursor-pointer ${className}`}
-      onMouseEnter={onClick}
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-    >
-      <div className={`flex items-center gap-6 ${align === 'right' ? 'flex-row-reverse text-right' : 'flex-row text-left'}`}>
-        
-        {/* Круглый узел */}
-        <div className={`relative flex-shrink-0 w-16 h-16 rounded-full border flex items-center justify-center transition-all duration-500 ${
-          isActive 
-            ? "bg-[#151518] border-[var(--red)] shadow-[0_0_20px_rgba(255,45,45,0.4)] scale-110" 
-            : "bg-[#0A0A0C] border-white/20 hover:border-white/50"
-        }`}>
-          <span className={`mono text-xl font-bold transition-colors duration-300 ${isActive ? "text-[var(--red)]" : "text-white/50"}`}>
-            {step.n}
-          </span>
-        </div>
-
-        {/* Текст, который раскрывается */}
-        <div className={`w-[280px] transition-all duration-500 ${isActive ? "opacity-100 translate-x-0" : "opacity-40 hover:opacity-100"}`}>
-          <h3 className={`text-xl font-semibold mb-2 transition-colors duration-300 ${isActive ? "text-white" : "text-white/70"}`}>
-            {step.t}
-          </h3>
-          <p className={`text-sm leading-relaxed transition-all duration-500 ${
-            isActive ? "max-h-[100px] opacity-100 mt-2" : "max-h-0 opacity-0 overflow-hidden lg:max-h-[100px] lg:opacity-100"
-          }`} style={{ color: "var(--muted)" }}>
-            {step.d}
-          </p>
-        </div>
-
-      </div>
-    </motion.div>
   );
 }
