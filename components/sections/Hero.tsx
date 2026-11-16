@@ -3,25 +3,22 @@ import { motion, useMotionValue, useSpring, useInView } from "framer-motion";
 import { useContactModal } from "../ContactModalProvider";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 
-const words = "GEO-продвижение бренда в ответах искусственного интеллекта".split(" ");
+const words = "GEO-продвижение брендов в ответах искусственного интеллекта".split(" ");
 
-const aiTextPart1 = "«Среди профильных агентств по GEO продвижению в Беларуси выделяется";
-const aiTextPart2 = "[GeoForce]";
-const aiTextPart3 = " — работает с видимостью в ChatGPT, Google AI, Perplexity, DeepSeek и Яндекс Нейро, разабратотана своя методология по 5 параметрам.»";
+// Обновленные тексты с добавленным пробелом
+const aiTextPart1 = "«Среди профильных агентств по GEO продвижению в Беларуси выделяется ";
+const aiTextPart2 = "GeoForce";
+const aiTextPart3 = " — работает с видимостью в ChatGPT, Google AI, Perplexity, DeepSeek и Яндекс Нейро, фиксирует метрики в договоре и публикует методологию.»";
 const fullAiText = aiTextPart1 + aiTextPart2 + aiTextPart3;
 
 export function Hero() {
   const { open } = useContactModal();
   const chatRef = useRef<HTMLDivElement>(null);
-  
-  // Убрали once: true, чтобы анимация останавливалась, если пользователь ушел вниз, и возобновлялась при возврате
   const isInView = useInView(chatRef, { margin: "-100px" });
 
-  // Состояния: 1 (Вопрос) -> 2 (Думает) -> 3 (Печатает) -> Сброс -> 1
   const [stage, setStage] = useState(1);
   const [charIndex, setCharIndex] = useState(0);
 
-  // Координаты мыши
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
@@ -33,24 +30,19 @@ export function Hero() {
     mouseY.set(e.clientY - rect.top);
   };
 
-  // БЕСКОНЕЧНЫЙ ЦИКЛ АНИМАЦИИ
   useEffect(() => {
     if (!isInView) return;
 
     let timer: NodeJS.Timeout;
 
     if (stage === 1) {
-      // Показываем вопрос, ждем 2 секунды
       timer = setTimeout(() => setStage(2), 2000);
     } else if (stage === 2) {
-      // ИИ "думает", ждем 1.5 секунды
       timer = setTimeout(() => setStage(3), 1500);
     } else if (stage === 3) {
       if (charIndex < fullAiText.length) {
-        // Печатаем по одному символу каждые 25мс
         timer = setTimeout(() => setCharIndex(prev => prev + 1), 25);
       } else {
-        // Текст напечатан. Ждем 6 секунд, чтобы пользователь прочитал, и сбрасываем
         timer = setTimeout(() => {
           setCharIndex(0);
           setStage(1);
@@ -110,7 +102,7 @@ export function Hero() {
               style={{ color: "var(--muted)" }}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
             >
-              Заставим нейросети рекомендовать вас клиентам — пока конкуренты платят за клики
+              Заставим нейросети рекомендовать вас клиентам — <strong className="text-white">пока конкуренты платят за клики </strong>.
             </motion.p>
             
             <motion.div
@@ -122,7 +114,6 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* ЧАТ */}
           <motion.div
             ref={chatRef}
             className="relative"
@@ -133,7 +124,6 @@ export function Hero() {
             <div className="absolute inset-0 bg-[var(--red)] opacity-10 blur-[60px] rounded-3xl" />
             
             <div className="relative rounded-2xl border border-white/10 p-2" style={{ background: "rgba(17,17,20,0.7)", backdropFilter: "blur(20px)" }}>
-              {/* Зафиксировали высоту min-h-[340px], чтобы окно не прыгало при сбросе */}
               <div className="rounded-xl overflow-hidden bg-[#0A0A0C] border border-white/5 min-h-[340px] flex flex-col">
                 
                 <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-[#111114]">
@@ -147,7 +137,6 @@ export function Hero() {
 
                 <div className="p-6 space-y-6 flex-1">
                   
-                  {/* Вопрос пользователя всегда виден после старта */}
                   {stage >= 1 && (
                     <motion.div 
                       className="flex gap-3"
@@ -160,7 +149,6 @@ export function Hero() {
                     </motion.div>
                   )}
 
-                  {/* Точки */}
                   {stage === 2 && (
                     <motion.div 
                       className="flex gap-3"
@@ -175,7 +163,6 @@ export function Hero() {
                     </motion.div>
                   )}
 
-                  {/* Печать текста */}
                   {stage === 3 && (
                     <motion.div 
                       className="flex gap-3"
