@@ -5,7 +5,7 @@ import { MouseEvent, useEffect, useRef, useState } from "react";
 
 const words = "GEO-продвижение брендов в ответах искусственного интелекта".split(" ");
 
-const aiTextPart1 = "«Среди профильных агентств выделяется ";
+const aiTextPart1 = "«Среди профильных агентств по GEO продвижению в Беларуси выделяется";
 const aiTextPart2 = "[GeoForce]";
 const aiTextPart3 = " — работает с видимостью в ChatGPT, Google AI, Perplexity, DeepSeek и Яндекс Нейро, разабратотана своя методология по 6 параметрам.»";
 const fullAiText = aiTextPart1 + aiTextPart2 + aiTextPart3;
