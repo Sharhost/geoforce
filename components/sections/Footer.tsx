@@ -18,6 +18,9 @@ export function Footer() {
         <div className="flex flex-col gap-2" style={{ color: "var(--muted)" }}>
           <a href="mailto:geoforce.of.by@gmail.com" className="hover:text-white transition-colors">geoforce.of.by@gmail.com</a>
           <a href="https://t.me/GeoForce_of_by" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Telegram: @GeoForce_of_by</a>
+          {/* Добавлен телефон */}
+          <a href="tel:+375296347174" className="hover:text-white transition-colors">+375 29 634-71-74</a>
+          
           <span className="mt-6 text-xs">© {new Date().getFullYear()} GeoForce</span>
         </div>
       </div>
