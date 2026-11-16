@@ -11,14 +11,13 @@ export function Footer() {
           </p>
         </div>
         <div className="flex flex-col gap-2" style={{ color: "var(--muted)" }}>
-          {/* Услуги удалены */}
           <a href="#seo-vs-geo" className="hover:text-white transition-colors">Сравнение</a>
           <a href="#metrics" className="hover:text-white transition-colors">Результаты</a>
           <a href="#faq" className="hover:text-white transition-colors">Вопросы</a>
         </div>
         <div className="flex flex-col gap-2" style={{ color: "var(--muted)" }}>
-          <a href="mailto:hello@geoforce.ru" className="hover:text-white transition-colors">hello@geoforce.ru</a>
-          <a href="#" className="hover:text-white transition-colors">Telegram: @geoforce</a>
+          <a href="mailto:geoforce.of.by@gmail.com" className="hover:text-white transition-colors">geoforce.of.by@gmail.com</a>
+          <a href="https://t.me/GeoForce_of_by" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Telegram: @GeoForce_of_by</a>
           <span className="mt-6 text-xs">© {new Date().getFullYear()} GeoForce</span>
         </div>
       </div>
