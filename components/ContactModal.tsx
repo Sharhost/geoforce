@@ -27,10 +27,10 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
     };
   }, [open, onClose]);
 
-  const copyToClipboard = async (text: string, type: "email" | "phone") => {
+  const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      setCopied(type === "email" ? "Адрес скопирован" : "Номер скопирован");
+      setCopied("Адрес скопирован");
       setTimeout(() => setCopied(null), 2500);
     } catch {}
   };
@@ -64,9 +64,9 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
             <p className="text-sm mb-6" style={{ color: "var(--muted)" }}>Ответим в течение рабочего дня.</p>
             
             <div className="space-y-3">
-              {/* Telegram */}
+              {/* Telegram - прямой переход */}
               <a
-                href="https://t.me/geoforce"
+                href="https://t.me/GeoForce_of_by"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 rounded-xl border p-4 hover:border-[var(--red)] hover:bg-white/[0.02] transition-colors group"
@@ -77,19 +77,13 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
                 </div>
                 <div>
                   <div className="font-medium">Написать в Telegram</div>
-                  <div className="text-xs" style={{ color: "var(--muted)" }}>@geoforce</div>
+                  <div className="text-xs" style={{ color: "var(--muted)" }}>@GeoForce_of_by</div>
                 </div>
               </a>
 
-              {/* Телефон */}
+              {/* Телефон - прямой звонок */}
               <a
                 href="tel:+375296347174"
-                onClick={(e) => {
-                  if (window.innerWidth > 768) {
-                    e.preventDefault();
-                    copyToClipboard("+375296347174", "phone");
-                  }
-                }}
                 className="flex items-center gap-3 rounded-xl border p-4 hover:border-[var(--red)] hover:bg-white/[0.02] transition-colors group"
                 style={{ borderColor: "var(--border)" }}
               >
@@ -102,9 +96,9 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
                 </div>
               </a>
 
-              {/* Email */}
+              {/* Email - копирование */}
               <button
-                onClick={() => copyToClipboard("hello@geoforce.ru", "email")}
+                onClick={() => copyToClipboard("geoforce.of.by@gmail.com")}
                 className="w-full flex items-center gap-3 rounded-xl border p-4 hover:border-[var(--red)] hover:bg-white/[0.02] transition-colors text-left group"
                 style={{ borderColor: "var(--border)" }}
               >
@@ -113,7 +107,7 @@ export function ContactModal({ open, onClose }: { open: boolean; onClose: () => 
                 </div>
                 <div>
                   <div className="font-medium">Написать на почту</div>
-                  <div className="text-xs" style={{ color: "var(--muted)" }}>hello@geoforce.ru</div>
+                  <div className="text-xs" style={{ color: "var(--muted)" }}>geoforce.of.by@gmail.com</div>
                 </div>
               </button>
             </div>
