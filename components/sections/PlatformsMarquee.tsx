@@ -1,4 +1,4 @@
-const items = ["ChatGPT", "Claude", "Gemini", "Perplexity", "Copilot", "Яндекс Нейро", "GigaChat"];
+const items = ["ChatGPT", "Claude", "Gemini", "Perplexity", "Copilot", "Яндекс Нейро", "GigaChat", "Google AI", "DeepDeek"];
 
 export function PlatformsMarquee() {
   const list = [...items, ...items];
