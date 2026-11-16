@@ -24,7 +24,6 @@ const methodologyJsonLd = {
 };
 
 export function Methodology() {
-  // Состояние для отслеживания наведенной карточки (null = ничего не наведено)
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
@@ -46,7 +45,7 @@ export function Methodology() {
           </p>
         </motion.div>
 
-        {/* ================= ЕДИНАЯ ШКАЛА (Только десктоп) ================= */}
+        {/* ================= ЕДИНАЯ ШКАЛА ================= */}
         <div className="hidden lg:grid grid-cols-4 gap-6 mb-8 relative">
           
           {/* Фоновая линия (серый трек) */}
@@ -55,16 +54,17 @@ export function Methodology() {
           {/* Активная линия (красное заполнение) */}
           <div
             className="absolute top-[9px] left-0 h-1 bg-[var(--red)] rounded-full transition-all duration-500 ease-out shadow-[0_0_10px_var(--red)]"
-            // Заполняется до центра выбранной карточки. Если ничего не выбрано — ширина 0.
+            // Заполняется ровно до центра выбранной карточки
             style={{ width: hoveredIdx !== null ? `${((hoveredIdx + 0.5) / 4) * 100}%` : "0%" }}
           />
 
           {steps.map((step, i) => {
-            // Узел считается активным, если он левее или равен наведенной карточке
             const isFilled = hoveredIdx !== null && i <= hoveredIdx;
             
             return (
-              <div key={step.n} className="relative z-10 flex flex-col gap-3">
+              // items-center выравнивает точку и цифру ровно по центру колонки
+              <div key={step.n} className="relative z-10 flex flex-col items-center gap-3">
+                
                 {/* Точка на шкале */}
                 <div 
                   className={`w-5 h-5 rounded-full border-2 bg-[#0A0A0C] flex items-center justify-center transition-colors duration-300 ${
@@ -78,7 +78,7 @@ export function Methodology() {
                   />
                 </div>
                 
-                {/* Номер над шкалой */}
+                {/* Номер (теперь ровно по центру) */}
                 <div 
                   className={`mono text-sm font-semibold transition-colors duration-300 ${
                     isFilled ? "text-[var(--red)]" : "text-white/40"
@@ -105,7 +105,6 @@ export function Methodology() {
                   isHovered ? "bg-[#151518] -translate-y-2" : "bg-[var(--surface)] hover:-translate-y-1"
                 }`}
               >
-                {/* Огромная цифра на фоне */}
                 <div 
                   className={`absolute -right-2 -top-6 text-[120px] font-bold leading-none pointer-events-none select-none mono transition-opacity duration-500 ${
                     isHovered ? "opacity-[0.08]" : "opacity-[0.03]"
@@ -126,7 +125,7 @@ export function Methodology() {
                   </p>
                 </div>
 
-                {/* Нижняя полоска, которая загорается при наведении */}
+                {/* Нижняя полоска на карточке */}
                 <div className="absolute bottom-0 left-0 w-full h-[2px] bg-white/5 overflow-hidden">
                   <div 
                     className={`h-full bg-[var(--red)] transition-all duration-500 ${
