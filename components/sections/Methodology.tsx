@@ -14,7 +14,7 @@ const steps = [
 const methodologyJsonLd = {
   "@context": "https://schema.org",
   "@type": "HowTo",
-  "name": "Четыре шага до видимости в ИИ",
+  "name": "Методология продвижени в ответах ИИ от GeoForce",
   "description": "Последовательный процесс GEO-продвижения от аудита до измеримого результата.",
   "step": steps.map((s, i) => ({
     "@type": "HowToStep",
@@ -42,7 +42,7 @@ export function Methodology() {
         >
           <h2 className="h2 max-w-3xl mb-4">Четыре шага до видимости в ИИ</h2>
           <p className="text-lg max-w-2xl" style={{ color: "var(--muted)" }}>
-            Наведите на карточку, чтобы увидеть этап на шкале.
+            Последовательный процесс GEO-продвижения от аудита до измеримого результата.
           </p>
         </motion.div>
 
