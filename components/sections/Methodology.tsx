@@ -2,65 +2,43 @@
 
 import { motion } from "framer-motion";
 
-// ... существующие импорты
-
-const webSiteJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "GeoForce",
-  "url": "https://geoforce-five.vercel.app",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://geoforce-five.vercel.app/search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-};
-
-const serviceJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "GEO-продвижение брендов в ответах ИИ",
-  "provider": {
-    "@type": "Organization",
-    "name": "GeoForce",
-    "url": "https://geoforce-five.vercel.app"
-  },
-  "description": "Оптимизация цифрового следа бренда для цитирования в ChatGPT, Google AI, Perplexity, DeepSeek и Яндекс Нейро.",
-  "areaServed": {
-    "@type": "Country",
-    "name": "Belarus"
-  }
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="ru" className={`${interTight.variable} ${jetbrains.variable}`}>
-      <body>
-        <SmoothScroll>
-          <ContactModalProvider>{children}</ContactModalProvider>
-        </SmoothScroll>
-        {/* Существующая разметка Organization */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
-        {/* Новая разметка */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
-      </body>
-    </html>
-  );
-}
-
-// and Schema
-
 const steps = [
-  ["01", "ИИ-аудит видимости", "Проверяем, как бренд представлен в ответах языковых моделей. Фиксируем исходную точку по нескольким параметрам"],
+  ["01", "ИИ-аудит видимости", "Проверяем, как бренд представлен в ответах языковых моделей. Фиксируем исходную точку — Citation Rate и Share of Voice."],
   ["02", "Стратегия контента", "Формируем семантическое ядро под ИИ-запросы и карту тем, на которые модель должна ссылаться на бренд."],
-  ["03", "Внедрение", "Оптимизируем материалы по запросы ИИ. Работаем с отзывами, каталогами, где ИИ ищет подтверждения."],
-  ["04", "Мониторинг", "Отслеживаем упоминания на 4 платформах. Ежемесячный отчёт с динамикой метрик и точками роста."],
+  ["03", "Внедрение", "Оптимизируем материалы, добавляем структурированные данные, выстраиваем граф знаний бренда."],
+  ["04", "Мониторинг", "Отслеживаем упоминания на 7 платформах. Ежемесячный отчёт с динамикой метрик и точками роста."],
+];
+
+// Разметка HowTo для нейросетей
+const methodologyJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Четыре шага до видимости в ИИ",
+  "description": "Последовательный процесс GEO-продвижения от аудита до измеримого результата.",
+  "step": steps.map(([n, t, d]) => ({
+    "@type": "HowToStep",
+    "position": parseInt(n),
+    "name": t,
+    "text": d
+  }))
+};
+
+const stairOffsets = [
+  "lg:mt-0",
+  "lg:mt-12",
+  "lg:mt-24",
+  "lg:mt-36",
 ];
 
 export function Methodology() {
   return (
     <section id="methodology" className="section relative">
+      {/* Внедряем JSON-LD разметку */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(methodologyJsonLd) }} 
+      />
+      
       <div className="container-x">
         
         <motion.div
@@ -68,51 +46,58 @@ export function Methodology() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-16"
         >
-          <h2 className="h2 max-w-3xl mb-4">Четыре шага до видимости в ИИ по методологии GeoForce</h2>
-          <p className="text-lg max-w-2xl" style={{ color: "var(--muted)" }}>
+          <h2 className="h2 max-w-3xl mb-4">Четыре шага до видимости в ИИ</h2>
+          <p className="mb-16 text-lg max-w-2xl" style={{ color: "var(--muted)" }}>
             Последовательный процесс: от аудита до измеримого результата.
           </p>
         </motion.div>
         
-        {/* Горизонтальный список без карточек */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-start relative">
           
+          <div className="hidden lg:block absolute top-1/2 left-0 w-full h-[1px] border-t border-dashed border-white/10 z-0 pointer-events-none" />
+
           {steps.map(([n, t, d], i) => (
             <motion.div 
               key={n} 
-              className="relative group"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className={`relative z-10 ${stairOffsets[i] || ""}`}
+              initial={{ opacity: 0, y: 60, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.2 + i * 0.15, 
+                ease: [0.16, 1, 0.3, 1]
+              }}
             >
-              {/* Верхняя линия (на десктопе) */}
-              <div className="hidden lg:block absolute top-[28px] left-0 w-full h-[1px] bg-white/10 transition-colors duration-300 group-hover:bg-[var(--red)]" />
-              
-              {/* Левая вертикальная линия (на мобильных) */}
-              <div className="lg:hidden absolute left-0 top-0 bottom-0 w-[1px] bg-white/10" />
-
-              <div className="pl-6 lg:pl-0 pt-0 lg:pt-16 pb-8 lg:pr-8 relative">
-                {/* Точка на линии (только десктоп) */}
-                <div className="hidden lg:flex absolute top-[24px] left-0 w-2 h-2 rounded-full bg-[var(--red)] shadow-[0_0_10px_var(--red)] z-10" />
-
-                {/* Цифра */}
+              <div className="group relative gradient-card p-8 h-full transition-transform duration-300 hover:-translate-y-2 flex flex-col">
+                
                 <div 
-                  className="mono text-3xl lg:text-4xl font-semibold mb-4 transition-all duration-300 group-hover:text-white"
+                  className="absolute -right-2 -top-6 text-[120px] font-bold leading-none opacity-[0.03] transition-opacity duration-500 group-hover:opacity-[0.08] pointer-events-none select-none mono"
                   style={{ color: "var(--red)" }}
                 >
                   {n}
                 </div>
 
-                {/* Текст */}
-                <h3 className="text-xl font-semibold mb-3 transition-transform duration-300 group-hover:translate-x-1">
-                  {t}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                  {d}
-                </p>
+                <div className="flex items-center gap-4 mb-6 relative z-10">
+                  <div 
+                    className="mono text-2xl font-semibold transition-colors duration-300 group-hover:text-white"
+                    style={{ color: "var(--red)", textShadow: "0 0 20px rgba(255,45,45,0.3)" }}
+                  >
+                    {n}
+                  </div>
+                  <div className="h-[1px] flex-1 bg-gradient-to-r from-white/20 to-transparent transition-colors duration-300 group-hover:from-[var(--red)]" />
+                </div>
+
+                <div className="relative z-10 flex-1">
+                  <h3 className="text-xl font-semibold mb-3 transition-transform duration-300 group-hover:translate-x-1">
+                    {t}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                    {d}
+                  </p>
+                </div>
+
               </div>
             </motion.div>
           ))}
