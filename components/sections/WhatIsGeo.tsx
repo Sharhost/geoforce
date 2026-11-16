@@ -17,7 +17,7 @@ export function WhatIsGeo() {
             <div className="text-xl md:text-2xl leading-relaxed">
               <span className="text-white font-semibold">GEO (Generative Engine Optimization)</span> — это управление видимостью вашего бренда в генеративных нейросетях. 
               <span className="block mt-4" style={{ color: "var(--muted)" }}>
-                ChatGPT, Gemini и Perplexity ежедневно сканируют миллионы страниц. GEO делает так, чтобы на этом радаре ваш бренд горел ярче всех, и ИИ замечал вас первым.
+                ChatGPT, Google AI и Perplexity ежедневно сканируют миллионы страниц. GeoForce делает так, чтобы на этом радаре ваш бренд горел ярче всех конкурентов и ИИ замечал вас первым.
               </span>
             </div>
           </Reveal>
@@ -33,7 +33,7 @@ export function WhatIsGeo() {
                 <div className="text-sm mono mb-2" style={{ color: "var(--red)" }}>01 / Сканирование</div>
                 <div className="text-xl font-semibold mb-2">Нейросети ищут факты</div>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                  ИИ не гуглит как человек. Он вычитывает данные из тысяч источников, чтобы сформировать базу знаний.
+                  ИИ не гуглит как человек. Он вычитывает данные из тысяч источников, дробит запрос на более мелкии подзапросы и формирует базу знаний для ответа.
                 </p>
               </div>
             </Reveal>
@@ -43,7 +43,7 @@ export function WhatIsGeo() {
                 <div className="text-sm mono mb-2" style={{ color: "var(--red)" }}>02 / Анализ</div>
                 <div className="text-xl font-semibold mb-2">Кому доверять?</div>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                  Если ваши данные структурированы и подтверждены авторитетными источниками, ИИ ставит на вас «маячок».
+                  Если ваши данные структурированы, оптимизированы под запросы и подтверждены авторитетными источниками, ИИ ставит Ваш сайт в приоритет.
                 </p>
               </div>
             </Reveal>
