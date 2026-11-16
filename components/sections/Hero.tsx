@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring, useInView } from "framer-motion";
 import { useContactModal } from "../ContactModalProvider";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 
-const words = "Агентство GeoForce осуществляет GEO-продвижение в Беларуси".split(" ");
+const words = "GEO-продвижение бренда в ответах нейросетей и ИИ-поисковиков".split(" ");
 
 const aiTextPart1 = "«Среди профильных агентств по GEO продвижению в Беларуси выделяется";
 const aiTextPart2 = "[GeoForce]";
@@ -110,7 +110,7 @@ export function Hero() {
               style={{ color: "var(--muted)" }}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
             >
-              Продвигаем бренды в ответах ChatGPT, Google AI, Perplexity, DeepSeek и Яндекс Нейро
+              Захватим локальный поиск и заставим нейросети рекомендовать вас клиентам
             </motion.p>
             
             <motion.div
