@@ -13,72 +13,66 @@ const methodologyJsonLd = {
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "Четыре шага до видимости в ИИ",
-  "description": "Последовательный процесс GEO-продвижения от аудита до измеримого результата.",
   "step": steps.map((s, i) => ({ "@type": "HowToStep", "position": i + 1, "name": s.t, "text": s.d }))
 };
 
 export function Methodology() {
   return (
-    <section id="methodology" className="section relative">
+    <section id="methodology" className="section relative overflow-hidden">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(methodologyJsonLd) }} />
       
-      <div className="container-x max-w-5xl">
+      <div className="container-x">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="h2 mb-4">Как мы работаем</h2>
-          <p className="mb-12 text-lg" style={{ color: "var(--muted)" }}>
-            Протокол внедрения GEO.
+          <h2 className="h2 mb-4">Дорожная карта внедрения</h2>
+          <p className="mb-16 text-lg max-w-2xl" style={{ color: "var(--muted)" }}>
+            Путь от невидимости в ИИ до статуса главного эксперта.
           </p>
         </motion.div>
         
-        {/* Окно терминала */}
-        <motion.div 
-          className="rounded-xl border border-white/10 bg-[#0A0A0C] overflow-hidden shadow-2xl"
-          initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-        >
-          {/* Шапка терминала */}
-          <div className="flex items-center px-4 py-3 bg-[#111114] border-b border-white/5">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-white/20" />
-              <div className="w-3 h-3 rounded-full bg-white/20" />
-              <div className="w-3 h-3 rounded-full bg-white/20" />
-            </div>
-            <span className="ml-4 mono text-xs text-white/30">geoforce@system:~/methodology</span>
-          </div>
+        <div className="relative max-w-4xl mx-auto">
+          
+          {/* Вертикальная линия пути (на десктопе) */}
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/5 -translate-x-1/2" />
+          
+          {/* Анимированная красная линия */}
+          <motion.div 
+            className="hidden md:block absolute left-1/2 top-0 w-[2px] bg-[var(--red)] -translate-x-1/2 origin-top shadow-[0_0_15px_var(--red)]"
+            initial={{ height: 0 }}
+            whileInView={{ height: "100%" }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+          />
 
-          {/* Строки кода */}
-          <div className="p-6 md:p-8 space-y-8 font-mono">
-            {steps.map((step, i) => (
-              <motion.div 
-                key={step.n}
-                initial={{ opacity: 0, x: -10 }} 
-                whileInView={{ opacity: 1, x: 0 }} 
-                viewport={{ once: true }} 
-                transition={{ delay: i * 0.2 }}
-                className="group"
-              >
-                <div className="flex items-center gap-3 mb-2 text-sm">
-                  <span className="text-[var(--red)]">➜</span>
-                  <span className="text-white/40">~ step_{step.n}</span>
-                  <span className="text-[#27C93F] ml-auto opacity-50 group-hover:opacity-100 transition-opacity">[ OK ]</span>
-                </div>
-                <div className="pl-6 border-l border-white/10 group-hover:border-[var(--red)] transition-colors">
-                  <h3 className="text-lg md:text-xl font-semibold text-white mb-2 font-sans">{step.t}</h3>
-                  <p className="text-sm md:text-base leading-relaxed text-white/60">{step.d}</p>
-                </div>
-              </motion.div>
-            ))}
-            
-            {/* Мигающий курсор в конце */}
-            <div className="flex items-center gap-2 pt-4">
-              <span className="text-[var(--red)]">➜</span>
-              <motion.div 
-                className="w-2.5 h-4 bg-white/50"
-                animate={{ opacity: [1, 0] }} 
-                transition={{ repeat: Infinity, duration: 1 }}
-              />
-            </div>
+          <div className="space-y-12 md:space-y-24">
+            {steps.map((step, i) => {
+              const isEven = i % 2 === 0;
+              return (
+                <motion.div 
+                  key={step.n}
+                  className={`relative flex flex-col md:flex-row items-center gap-8 ${isEven ? "md:flex-row" : "md:flex-row-reverse"}`}
+                  initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ delay: i * 0.2 }}
+                >
+                  {/* Текстовая карточка */}
+                  <div className={`w-full md:w-[45%] ${isEven ? "md:text-right" : "md:text-left"}`}>
+                    <div className="gradient-card p-6 md:p-8 relative group hover:-translate-y-1 transition-transform">
+                      <div className="mono text-[var(--red)] text-sm mb-2">{step.n} / ЭТАП</div>
+                      <h3 className="text-xl font-semibold mb-3">{step.t}</h3>
+                      <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>{step.d}</p>
+                    </div>
+                  </div>
+
+                  {/* Точка на линии */}
+                  <div className="absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-[#0A0A0C] border-2 border-[var(--red)] flex items-center justify-center z-10 shadow-[0_0_15px_var(--red)] hidden md:flex">
+                    <div className="w-2 h-2 rounded-full bg-[var(--red)]" />
+                  </div>
+
+                  {/* Пустая колонка для сетки */}
+                  <div className="hidden md:block w-[45%]" />
+                </motion.div>
+              );
+            })}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
