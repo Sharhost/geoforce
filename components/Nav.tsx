@@ -57,19 +57,18 @@ export function Nav() {
           
           <div className="flex items-center gap-5">
             
-            {/* БЛОК С АНИМАЦИЕЙ ТЕЛЕФОНА */}
+            {/* БЛОК С ТЕЛЕФОНОМ. Добавлен класс md:mr-4 для отступа справа */}
             <motion.a 
               href="tel:+375296347174" 
-              className="hidden md:flex items-center gap-2 text-sm font-medium relative group"
+              className="hidden md:flex items-center gap-2 text-sm font-medium relative group md:mr-4"
               style={{ color: "var(--text)" }}
               initial="initial"
               whileHover="hover"
             >
-              {/* Иконка телефона (эффект "звонка") */}
               <motion.div
                 variants={{
                   initial: { rotate: 0 },
-                  hover: { rotate: [0, -15, 15, -15, 15, 0] }, // Покачивание
+                  hover: { rotate: [0, -15, 15, -15, 15, 0] }, 
                 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
                 className="relative z-10"
@@ -77,12 +76,11 @@ export function Nav() {
                 <IconPhone className="w-4 h-4 transition-colors duration-300 group-hover:text-[var(--red)]" />
               </motion.div>
 
-              {/* Текст (сдвиг и изменение цвета) */}
               <motion.span
                 className="relative z-10"
                 variants={{
                   initial: { x: 0, color: "var(--text)" },
-                  hover: { x: 3, color: "var(--red)" }, // Сдвиг вправо на 3px и покраснение
+                  hover: { x: 3, color: "var(--red)" },
                 }}
                 transition={{ duration: 0.3 }}
               >
