@@ -8,6 +8,7 @@ const items = [
   { t: "Ежемесячный отчёт", d: "Отчет в виде Excel-файла с понятными метриками.", metric: "5 метрик" },
 ];
 
+// Обязательно добавляем слово export перед function
 export function Deliverables() {
   return (
     <section className="section relative">
@@ -25,7 +26,7 @@ export function Deliverables() {
             <Reveal key={item.t} delay={0.05 + i * 0.05}>
               <div className="group relative flex items-center justify-between py-6 md:py-8 border-b border-white/10 cursor-default">
                 
-                {/* АНИМАЦИЯ РАСТУЩЕЙ ЛИНИИ ПРИ HOVER (с плавной кривой) */}
+                {/* АНИМАЦИЯ РАСТУЩЕЙ ЛИНИИ ПРИ HOVER */}
                 <div 
                   className="absolute bottom-0 left-0 h-[1px] bg-[var(--red)] w-0 group-hover:w-full z-20 shadow-[0_0_10px_var(--red)]" 
                   style={{ transition: "width 0.8s cubic-bezier(0.16, 1, 0.3, 1)" }} 
