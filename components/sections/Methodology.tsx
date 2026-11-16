@@ -10,6 +10,7 @@ const steps = [
   { n: "04", t: "Мониторинг", d: "Отслеживаем упоминания на 7 платформах. Ежемесячный отчёт с динамикой метрик и точками роста." },
 ];
 
+
 const methodologyJsonLd = {
   "@context": "https://schema.org",
   "@type": "HowTo",
@@ -48,21 +49,20 @@ export function Methodology() {
         {/* ================= ЕДИНАЯ ШКАЛА ================= */}
         <div className="hidden lg:grid grid-cols-4 gap-6 mb-8 relative">
           
-          {/* Фоновая линия (серый трек) */}
-          <div className="absolute top-[9px] left-0 w-full h-1 bg-white/10 rounded-full" />
+          {/* Фоновая линия (серый трек) - Теперь начинается с 01 и заканчивается на 04 */}
+          <div className="absolute top-[9px] left-[12.5%] w-[75%] h-1 bg-white/10 rounded-full" />
           
           {/* Активная линия (красное заполнение) */}
           <div
-            className="absolute top-[9px] left-0 h-1 bg-[var(--red)] rounded-full transition-all duration-500 ease-out shadow-[0_0_10px_var(--red)]"
-            // Заполняется ровно до центра выбранной карточки
-            style={{ width: hoveredIdx !== null ? `${((hoveredIdx + 0.5) / 4) * 100}%` : "0%" }}
+            className="absolute top-[9px] left-[12.5%] h-1 bg-[var(--red)] rounded-full transition-all duration-500 ease-out shadow-[0_0_10px_var(--red)]"
+            // Ширина рассчитывается так, чтобы идеально доходить до центра выбранной карточки
+            style={{ width: hoveredIdx !== null ? `${hoveredIdx * 25}%` : "0%" }}
           />
 
           {steps.map((step, i) => {
             const isFilled = hoveredIdx !== null && i <= hoveredIdx;
             
             return (
-              // items-center выравнивает точку и цифру ровно по центру колонки
               <div key={step.n} className="relative z-10 flex flex-col items-center gap-3">
                 
                 {/* Точка на шкале */}
@@ -78,7 +78,7 @@ export function Methodology() {
                   />
                 </div>
                 
-                {/* Номер (теперь ровно по центру) */}
+                {/* Номер */}
                 <div 
                   className={`mono text-sm font-semibold transition-colors duration-300 ${
                     isFilled ? "text-[var(--red)]" : "text-white/40"
