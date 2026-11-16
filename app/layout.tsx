@@ -9,6 +9,7 @@ const interTight = Inter_Tight({
   variable: "--font-inter-tight",
   display: "swap",
 });
+
 const jetbrains = JetBrains_Mono({
   subsets: ["latin", "cyrillic"],
   variable: "--font-jetbrains",
