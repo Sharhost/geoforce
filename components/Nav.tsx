@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Logo } from "./Logo";
 import { useContactModal } from "./ContactModalProvider";
+import { IconPhone } from "./icons"; // Импортируем иконку
 
 const links = [
   { href: "#seo-vs-geo", label: "Сравнение" },
@@ -35,7 +36,6 @@ export function Nav() {
 
   return (
     <>
-      {/* Шапка всегда на самом верху (z-[110]) */}
       <header
         className="fixed top-0 inset-x-0 z-[110] transition-colors"
         style={{
@@ -55,7 +55,17 @@ export function Nav() {
             ))}
           </nav>
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-5">
+            {/* НОВЫЙ БЛОК С ТЕЛЕФОНОМ В ШАПКЕ */}
+            <a 
+              href="tel:+375296347174" 
+              className="hidden md:flex items-center gap-2 text-sm font-medium hover:text-[var(--red)] transition-colors"
+              style={{ color: "var(--text)" }}
+            >
+              <IconPhone className="w-4 h-4" />
+              <span>+375 29 634-71-74</span>
+            </a>
+
             <button
               onClick={() => { setMenuOpen(false); open(); }}
               className="hidden md:inline-flex rounded-full px-6 py-2.5 text-sm font-medium"
@@ -85,7 +95,6 @@ export function Nav() {
         </div>
       </header>
 
-      {/* Мобильное меню (z-[100], фон на весь экран) */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -93,7 +102,6 @@ export function Nav() {
             animate={{ opacity: 1 }} 
             exit={{ opacity: 0 }}
             className="lg:hidden fixed inset-0 z-[100] p-8 pt-24 overflow-y-auto"
-            // ЖЕСТКО ЗАДАЕМ ФОН ИЗ ПЕРЕМЕННОЙ, ЧТОБЫ ОН БЫЛ НЕПРОЗРАЧНЫМ
             style={{ background: "var(--bg)" }}
           >
             <div className="flex flex-col gap-6 text-2xl mt-4">
