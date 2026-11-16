@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const steps = [
@@ -23,6 +24,9 @@ const methodologyJsonLd = {
 };
 
 export function Methodology() {
+  // Состояние для отслеживания наведенной карточки (null = ничего не наведено)
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
   return (
     <section id="methodology" className="section relative">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(methodologyJsonLd) }} />
@@ -38,67 +42,101 @@ export function Methodology() {
         >
           <h2 className="h2 max-w-3xl mb-4">Четыре шага до видимости в ИИ</h2>
           <p className="text-lg max-w-2xl" style={{ color: "var(--muted)" }}>
-            Последовательный процесс: от аудита до измеримого результата.
+            Наведите на карточку, чтобы увидеть этап на шкале.
           </p>
         </motion.div>
 
-        {/* ================= ШКАЛА СВЕРХУ (Только десктоп) ================= */}
-        <div className="hidden lg:grid grid-cols-4 gap-6 mb-12 relative">
-          {/* Фоновая линия, соединяющая все отрезки */}
-          <div className="absolute top-[30px] left-0 w-full h-[1px] bg-white/10 z-0" />
+        {/* ================= ЕДИНАЯ ШКАЛА (Только десктоп) ================= */}
+        <div className="hidden lg:grid grid-cols-4 gap-6 mb-8 relative">
+          
+          {/* Фоновая линия (серый трек) */}
+          <div className="absolute top-[9px] left-0 w-full h-1 bg-white/10 rounded-full" />
+          
+          {/* Активная линия (красное заполнение) */}
+          <div
+            className="absolute top-[9px] left-0 h-1 bg-[var(--red)] rounded-full transition-all duration-500 ease-out shadow-[0_0_10px_var(--red)]"
+            // Заполняется до центра выбранной карточки. Если ничего не выбрано — ширина 0.
+            style={{ width: hoveredIdx !== null ? `${((hoveredIdx + 0.5) / 4) * 100}%` : "0%" }}
+          />
 
-          {steps.map((step, i) => (
-            <div key={step.n} className="relative z-10">
-              {/* Номер над шкалой */}
-              <div className="mono text-sm font-semibold mb-3 transition-colors duration-500 text-white/50">
-                {step.n}
+          {steps.map((step, i) => {
+            // Узел считается активным, если он левее или равен наведенной карточке
+            const isFilled = hoveredIdx !== null && i <= hoveredIdx;
+            
+            return (
+              <div key={step.n} className="relative z-10 flex flex-col gap-3">
+                {/* Точка на шкале */}
+                <div 
+                  className={`w-5 h-5 rounded-full border-2 bg-[#0A0A0C] flex items-center justify-center transition-colors duration-300 ${
+                    isFilled ? "border-[var(--red)]" : "border-white/20"
+                  }`}
+                >
+                  <div 
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      isFilled ? "bg-[var(--red)] shadow-[0_0_8px_var(--red)]" : "bg-transparent"
+                    }`} 
+                  />
+                </div>
+                
+                {/* Номер над шкалой */}
+                <div 
+                  className={`mono text-sm font-semibold transition-colors duration-300 ${
+                    isFilled ? "text-[var(--red)]" : "text-white/40"
+                  }`}
+                >
+                  {step.n}
+                </div>
               </div>
-              
-              {/* Сегмент шкалы */}
-              <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                <motion.div 
-                  className="h-full bg-[var(--red)] shadow-[0_0_10px_var(--red)]"
-                  initial={{ width: "0%" }}
-                  whileInView={{ width: "100%" }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  // Задержка создает эффект постепенного заполнения слева направо
-                  transition={{ duration: 1.5, delay: i * 0.4, ease: "easeInOut" }}
-                />
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* ================= КАРТОЧКИ СНИЗУ ================= */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((step, i) => (
-            <motion.div 
-              key={step.n} 
-              className="relative group gradient-card p-8 h-full flex flex-col overflow-hidden transition-transform hover:-translate-y-1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              // Появление карточек синхронизировано с заполнением шкалы
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.4 }}
-            >
-              {/* Огромная цифра на фоне */}
-              <div 
-                className="absolute -right-2 -top-6 text-[120px] font-bold leading-none opacity-[0.03] pointer-events-none select-none mono transition-opacity duration-500 group-hover:opacity-[0.08]"
-                style={{ color: "var(--red)" }}
+          {steps.map((step, i) => {
+            const isHovered = hoveredIdx === i;
+            
+            return (
+              <div
+                key={step.n}
+                onMouseEnter={() => setHoveredIdx(i)}
+                onMouseLeave={() => setHoveredIdx(null)}
+                className={`relative group gradient-card p-8 h-full flex flex-col overflow-hidden transition-all duration-500 cursor-pointer ${
+                  isHovered ? "bg-[#151518] -translate-y-2" : "bg-[var(--surface)] hover:-translate-y-1"
+                }`}
               >
-                {step.n}
-              </div>
+                {/* Огромная цифра на фоне */}
+                <div 
+                  className={`absolute -right-2 -top-6 text-[120px] font-bold leading-none pointer-events-none select-none mono transition-opacity duration-500 ${
+                    isHovered ? "opacity-[0.08]" : "opacity-[0.03]"
+                  }`}
+                  style={{ color: "var(--red)" }}
+                >
+                  {step.n}
+                </div>
 
-              <div className="relative z-10 flex-1">
-                <h3 className="text-xl font-semibold mb-3 transition-colors duration-300 group-hover:text-[var(--red)]">
-                  {step.t}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-                  {step.d}
-                </p>
+                <div className="relative z-10 flex-1">
+                  <h3 className={`text-xl font-semibold mb-3 transition-colors duration-300 ${
+                    isHovered ? "text-[var(--red)]" : "text-white"
+                  }`}>
+                    {step.t}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+                    {step.d}
+                  </p>
+                </div>
+
+                {/* Нижняя полоска, которая загорается при наведении */}
+                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-white/5 overflow-hidden">
+                  <div 
+                    className={`h-full bg-[var(--red)] transition-all duration-500 ${
+                      isHovered ? "w-full opacity-100" : "w-0 opacity-0"
+                    }`} 
+                  />
+                </div>
               </div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
 
       </div>
