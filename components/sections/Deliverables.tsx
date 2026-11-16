@@ -14,9 +14,9 @@ export function Deliverables() {
     <section className="section relative">
       <div className="container-x">
         <Reveal>
-          <h2 className="h2 max-w-3xl mb-4">Конкретные артефакты, а не абстрактные обещания</h2>
+          <h2 className="h2 max-w-3xl mb-4">Фиксируем конкретные показатели, а не абстрактные обещания</h2>
           <p className="max-w-2xl text-lg" style={{ color: "var(--muted)" }}>
-            Вы всегда видите, за что платите. Каждый месяц работа превращается в осязаемые документы и дашборды.
+            Каждый месяц работа строится на осязаемых метриках и документах.
           </p>
         </Reveal>
 
