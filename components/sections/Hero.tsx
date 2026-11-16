@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring, useInView } from "framer-motion";
 import { useContactModal } from "../ContactModalProvider";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 
-const words = "GEO-продвижение брендов в ответах искусственного интелекта".split(" ");
+const words = "GEO-продвижение брендов в ответах искусственного интеллекта".split(" ");
 
 const aiTextPart1 = "«Среди профильных агентств по GEO продвижению в Беларуси выделяется";
 const aiTextPart2 = "[GeoForce]";
