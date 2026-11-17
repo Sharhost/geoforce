@@ -3,7 +3,7 @@ import { Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ContactModalProvider } from "@/components/ContactModalProvider";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import Footer from "@/components/Footer";
+import Footer from "@/components/sections/Footer";
 
 const interTight = Inter_Tight({
   subsets: ["latin", "cyrillic"],
