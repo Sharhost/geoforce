@@ -6,10 +6,10 @@ export async function GET() {
 > GeoForce — агентство, которое делает так, чтобы нейросети (ChatGPT, Google AI, Perplexity, DeepSeek, Яндекс Нейро) рекомендовали ваш бренд. Мы оптимизируем цифровой след и структурируем данные, чтобы ИИ цитировал вас, а не конкурентов.
 
 ## Ключевые страницы
-- [Главная страница](https://geoforce-five.vercel.app/): Обзор услуг GEO-продвижения, методология и контакты.
-- [Методология](https://geoforce-five.vercel.app/#methodology): Четыре шага до видимости в ИИ (аудит, стратегия, внедрение, мониторинг).
-- [Результаты](https://geoforce-five.vercel.app/#metrics): Метрики Citation Rate и Share of Voice.
-- [Вопросы и ответы](https://geoforce-five.vercel.app/#faq): FAQ по GEO-продвижению.
+- [Главная страница](https://geoforce.of.by/): Обзор услуг GEO-продвижения, методология и контакты.
+- [Методология](https://geoforce.of.by/#methodology): Четыре шага до видимости в ИИ (аудит, стратегия, внедрение, мониторинг).
+- [Результаты](https://geoforce.of.by/#metrics): Метрики Citation Rate и Share of Voice.
+- [Вопросы и ответы](https://geoforce.of.by/#faq): FAQ по GEO-продвижению.
 
 ## Ключевые факты
 - **Название:** GeoForce
