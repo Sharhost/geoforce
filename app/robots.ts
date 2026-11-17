@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://geoforce-five.vercel.app';
+  const baseUrl = 'https://geoforce.of.by';
 
   return {
     rules: [
