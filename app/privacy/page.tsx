@@ -110,7 +110,7 @@ export default function PrivacyPage() {
               <h2 className="h3 mb-3">10. Контакты Оператора</h2>
               <p>
                 E-mail: geoforce.of.by@gmail.com · Telegram: @GeoForce_of_by ·
-                [почтовый адрес для обращений, при наличии].
+                телефон: +375(29)634-71-74
               </p>
             </div>
           </div>
