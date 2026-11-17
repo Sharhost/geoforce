@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-/* Ссылки-якоря: работают и с главной, и со страницы /privacy */
 const NAV_LINKS = [
   { href: "/#methodology", label: "Методология" },
   { href: "/#metrics", label: "Результаты" },
@@ -56,7 +55,7 @@ export default function Footer() {
   return (
     <footer className="pb-20 md:pb-0" style={{ borderTop: "1px solid var(--border)" }}>
       {/* Верхняя строка: лого | ссылки | контакты */}
-      <div className="container-x py-10 md:py-14 grid gap-10 md:grid-cols-3 md:items-start">
+      <div className="container-x pt-14 pb-6 md:py-14 grid gap-10 md:grid-cols-3 md:items-start">
         <div>
           <a
             href="/"
@@ -88,12 +87,13 @@ export default function Footer() {
           </p>
         </div>
 
-        <nav className="flex flex-col gap-2 text-sm md:items-center">
+        {/* Ссылки: колонка в центре, текст выровнен по левому краю колонки */}
+        <nav className="flex flex-col gap-2 text-sm md:items-start">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="w-fit md:mx-auto text-[color:var(--muted)] hover:text-white transition-colors"
+              className="w-fit text-[color:var(--muted)] hover:text-white transition-colors"
             >
               {link.label}
             </Link>
@@ -117,9 +117,9 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Нижняя строка без разделительной черты: © | политика | реквизиты */}
+      {/* Нижняя строка: © | политика | реквизиты, без разделительной черты */}
       <div
-        className="container-x pb-8 flex flex-col gap-2 text-xs mono md:grid md:grid-cols-3 md:items-center"
+        className="container-x pt-6 pb-12 md:pt-0 md:pb-12 flex flex-col gap-2 text-xs mono md:grid md:grid-cols-3 md:items-center"
         style={{ color: "var(--muted)" }}
       >
         <span className="md:justify-self-start">
@@ -131,7 +131,7 @@ export default function Footer() {
         >
           Политика конфиденциальности
         </Link>
-        <span className="md:justify-self-end">Гапоненко П. Н, УНП EB2432789</span>
+        <span className="md:justify-self-end">Гапоненко П. А., УНП EB2432789</span>
       </div>
     </footer>
   );
