@@ -54,84 +54,87 @@ const CONTACTS: Contact[] = [
 export default function Footer() {
   return (
     <footer className="pb-20 md:pb-0" style={{ borderTop: "1px solid var(--border)" }}>
-      {/* Верхняя строка: лого | ссылки | контакты */}
-      <div className="container-x pt-14 pb-6 md:py-14 grid gap-10 md:grid-cols-3 md:items-start">
-        <div>
-          <a
-            href="/"
-            aria-label="GeoForce — на главную"
-            className="inline-flex items-baseline"
-            style={{
-              fontSize: 26,
-              lineHeight: 1,
-              fontFamily: "var(--font-inter-tight), system-ui, sans-serif",
-              fontWeight: 600,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            <span style={{ color: "var(--red)" }}>Geo</span>
-            <span style={{ color: "#F5F5F7" }}>Force</span>
-            <span
-              style={{
-                display: "inline-block",
-                width: 5,
-                height: 5,
-                borderRadius: "50%",
-                background: "var(--red)",
-                marginLeft: 1,
-              }}
-            />
-          </a>
-          <p className="text-sm mt-3 text-[color:var(--muted)]">
-            GEO-продвижение брендов в ответах ИИ. Беларусь.
-          </p>
-        </div>
-
-        {/* Ссылки: колонка в центре, текст выровнен по левому краю колонки */}
-        <nav className="flex flex-col gap-2 text-sm md:items-start">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="w-fit text-[color:var(--muted)] hover:text-white transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex flex-col gap-2 text-sm md:items-end">
-          {CONTACTS.map((contact) => (
+      {/* Единый grid 3 колонки: лого/© | навигация/политика | контакты/УНП */}
+      <div className="container-x pt-10 md:pt-14 pb-12 md:pb-12 grid gap-10 md:grid-cols-3">
+        {/* Левая колонка */}
+        <div className="flex flex-col gap-10 md:gap-[180px]">
+          <div>
             <a
-              key={contact.href}
-              href={contact.href}
-              {...(contact.external
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
-              className="flex items-center gap-2 w-fit md:ml-auto text-[color:var(--muted)] hover:text-[color:var(--red)] transition-colors"
+              href="/"
+              aria-label="GeoForce — на главную"
+              className="inline-flex items-baseline"
+              style={{
+                fontSize: 26,
+                lineHeight: 1,
+                fontFamily: "var(--font-inter-tight), system-ui, sans-serif",
+                fontWeight: 600,
+                letterSpacing: "-0.02em",
+              }}
             >
-              {contact.icon}
-              <span>{contact.label}</span>
+              <span style={{ color: "var(--red)" }}>Geo</span>
+              <span style={{ color: "#F5F5F7" }}>Force</span>
+              <span
+                style={{
+                  display: "inline-block",
+                  width: 5,
+                  height: 5,
+                  borderRadius: "50%",
+                  background: "var(--red)",
+                  marginLeft: 1,
+                }}
+              />
             </a>
-          ))}
+            <p className="text-sm mt-3 text-[color:var(--muted)]">
+              GEO-продвижение брендов в ответах ИИ. Беларусь.
+            </p>
+          </div>
+          <span className="text-xs mono text-[color:var(--muted)]">
+            © {new Date().getFullYear()} GeoForce. Все права защищены.
+          </span>
         </div>
-      </div>
 
-      {/* Нижняя строка: © | политика | реквизиты, без разделительной черты */}
-      <div
-        className="container-x pt-6 pb-12 md:pt-0 md:pb-12 flex flex-col gap-2 text-xs mono md:grid md:grid-cols-3 md:items-center"
-        style={{ color: "var(--muted)" }}
-      >
-        <span className="md:justify-self-start">
-          © {new Date().getFullYear()} GeoForce. Все права защищены.
-        </span>
-        <Link
-          href="/privacy"
-          className="w-fit md:justify-self-center hover:text-white transition-colors"
-        >
-          Политика конфиденциальности
-        </Link>
-        <span className="md:justify-self-end">Гапоненко П. А., УНП EB2432789</span>
+        {/* Центральная колонка: навигация выровнена с политикой */}
+        <div className="flex flex-col gap-10 md:gap-[180px]">
+          <nav className="flex flex-col gap-2 text-sm">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="w-fit text-[color:var(--muted)] hover:text-white transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+          <Link
+            href="/privacy"
+            className="w-fit text-xs mono text-[color:var(--muted)] hover:text-white transition-colors"
+          >
+            Политика конфиденциальности
+          </Link>
+        </div>
+
+        {/* Правая колонка */}
+        <div className="flex flex-col gap-10 md:gap-[180px] md:items-end">
+          <div className="flex flex-col gap-2 text-sm md:items-end">
+            {CONTACTS.map((contact) => (
+              <a
+                key={contact.href}
+                href={contact.href}
+                {...(contact.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
+                className="flex items-center gap-2 w-fit md:ml-auto text-[color:var(--muted)] hover:text-[color:var(--red)] transition-colors"
+              >
+                {contact.icon}
+                <span>{contact.label}</span>
+              </a>
+            ))}
+          </div>
+          <span className="text-xs mono text-[color:var(--muted)] md:text-right">
+            Гапоненко П. А., УНП EB2432789
+          </span>
+        </div>
       </div>
     </footer>
   );
