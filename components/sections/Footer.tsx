@@ -81,7 +81,7 @@ export default function Footer() {
               />
             </a>
             <p className="text-sm mt-3 text-[color:var(--muted)]">
-              GEO-продвижение брендов в ответах ИИ. Беларусь.
+              GEO-продвижение брендов в ответах ИИ в Беларуси
             </p>
           </div>
 
@@ -120,7 +120,7 @@ export default function Footer() {
           <Link href="/privacy" className="w-fit hover:text-white transition-colors">
             Политика конфиденциальности
           </Link>
-          <span className="md:text-right">Гапоненко П. А., УНП EB2432789</span>
+          <span className="md:text-right">Гапоненко П. Н. - УНП EB2432789</span>
         </div>
       </div>
     </footer>
