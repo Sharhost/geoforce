@@ -1,13 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://geoforce.of.by/</loc>
-    <lastmod>2026-11-17</lastmod>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://geoforce.of.by/privacy</loc>
-    <lastmod>2026-11-17</lastmod>
-    <priority>0.3</priority>
-  </url>
-</urlset>
+import type { MetadataRoute } from "next";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+  return [
+    {
+      url: "https://geoforce.of.by",
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 1,
+    },
+    {
+      url: "https://geoforce.of.by/privacy",
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+  ];
+}
