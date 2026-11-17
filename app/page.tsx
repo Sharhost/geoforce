@@ -13,7 +13,7 @@ import { Author } from "@/components/sections/Author"; // <-- ДОБАВЛЕН �
 import { NotPromise } from "@/components/sections/NotPromise";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
-import { Footer } from "@/components/sections/Footer";
+
 
 export default function Home() {
   return (
@@ -37,7 +37,7 @@ export default function Home() {
         <Faq />
         <FinalCta />
       </main>
-      <Footer />
+      
       <MobileCtaBar />
     </>
   );
