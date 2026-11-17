@@ -10,7 +10,7 @@ const NAV_LINKS = [
 function PhoneIcon() {
   return (
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 1 2.81.7A2 2 0 0 1 22 16.92z" />
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
     </svg>
   );
 }
@@ -33,31 +33,27 @@ function TelegramIcon() {
   );
 }
 
-type Contact = {
-  href: string;
-  label: string;
-  icon: ReactNode;
-  external?: boolean;
-};
+type Contact = { href: string; label: string; icon: ReactNode; external?: boolean };
 
 const CONTACTS: Contact[] = [
   { href: "tel:+375296347174", label: "+375 29 634-71-74", icon: <PhoneIcon /> },
   { href: "mailto:geoforce.of.by@gmail.com", label: "geoforce.of.by@gmail.com", icon: <MailIcon /> },
-  {
-    href: "https://t.me/GeoForce_of_by",
-    label: "Telegram: @GeoForce_of_by",
-    icon: <TelegramIcon />,
-    external: true,
-  },
+  { href: "https://t.me/GeoForce_of_by", label: "Telegram: @GeoForce_of_by", icon: <TelegramIcon />, external: true },
 ];
+
+// Пропорции колонок одинаковы в обоих рядах => навигация стоит ровно над политикой.
+// Увеличьте первую цифру (1.3fr), чтобы сильнее сдвинуть центральную колонку вправо.
+const COLS = "md:grid-cols-[1.3fr_1fr_1fr]";
 
 export default function Footer() {
   return (
-    <footer className="pb-20 md:pb-0" style={{ borderTop: "1px solid var(--border)" }}>
-      {/* Единый grid 3 колонки: лого/© | навигация/политика | контакты/УНП */}
-      <div className="container-x pt-10 md:pt-14 pb-12 md:pb-12 grid gap-10 md:grid-cols-3">
-        {/* Левая колонка */}
-        <div className="flex flex-col gap-10 md:gap-[180px]">
+    <footer
+      className="pt-12 md:pt-14 pb-20 md:pb-12"
+      style={{ borderTop: "1px solid var(--border)" }}
+    >
+      <div className="container-x">
+        {/* ВЕРХНИЙ РЯД: лого | навигация | контакты */}
+        <div className={`grid gap-10 md:gap-8 ${COLS} md:items-start`}>
           <div>
             <a
               href="/"
@@ -88,13 +84,7 @@ export default function Footer() {
               GEO-продвижение брендов в ответах ИИ. Беларусь.
             </p>
           </div>
-          <span className="text-xs mono text-[color:var(--muted)]">
-            © {new Date().getFullYear()} GeoForce. Все права защищены.
-          </span>
-        </div>
 
-        {/* Центральная колонка: навигация выровнена с политикой */}
-        <div className="flex flex-col gap-10 md:gap-[180px]">
           <nav className="flex flex-col gap-2 text-sm">
             {NAV_LINKS.map((link) => (
               <Link
@@ -106,24 +96,13 @@ export default function Footer() {
               </Link>
             ))}
           </nav>
-          <Link
-            href="/privacy"
-            className="w-fit text-xs mono text-[color:var(--muted)] hover:text-white transition-colors"
-          >
-            Политика конфиденциальности
-          </Link>
-        </div>
 
-        {/* Правая колонка */}
-        <div className="flex flex-col gap-10 md:gap-[180px] md:items-end">
           <div className="flex flex-col gap-2 text-sm md:items-end">
             {CONTACTS.map((contact) => (
               <a
                 key={contact.href}
                 href={contact.href}
-                {...(contact.external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
+                {...(contact.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className="flex items-center gap-2 w-fit md:ml-auto text-[color:var(--muted)] hover:text-[color:var(--red)] transition-colors"
               >
                 {contact.icon}
@@ -131,9 +110,17 @@ export default function Footer() {
               </a>
             ))}
           </div>
-          <span className="text-xs mono text-[color:var(--muted)] md:text-right">
-            Гапоненко П. А., УНП EB2432789
-          </span>
+        </div>
+
+        {/* НИЖНИЙ РЯД: © | политика | УНП — одна строка grid => выровнена по горизонтали */}
+        <div
+          className={`mt-10 md:mt-12 grid gap-3 md:gap-8 ${COLS} md:items-center text-xs mono text-[color:var(--muted)]`}
+        >
+          <span>© {new Date().getFullYear()} GeoForce. Все права защищены.</span>
+          <Link href="/privacy" className="w-fit hover:text-white transition-colors">
+            Политика конфиденциальности
+          </Link>
+          <span className="md:text-right">Гапоненко П. А., УНП EB2432789</span>
         </div>
       </div>
     </footer>
