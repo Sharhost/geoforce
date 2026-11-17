@@ -40,7 +40,7 @@ export const metadata: Metadata = {
         alt: "GeoForce — GEO-продвижение",
       },
     ],
-    locale: "ru_RU",
+    locale: "ru_by",
     type: "website",
   },
   twitter: {
@@ -109,6 +109,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </SmoothScroll>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
         <Footer />
       </body>
     </html>
