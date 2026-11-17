@@ -49,7 +49,7 @@ export function Author() {
               
               <div className="space-y-4 text-base leading-relaxed mb-8" style={{ color: "var(--muted)" }}>
                 <p>
-                  3 года занимаюсь SEO продвижением на фрилансе. Когда появились нейросети, стало очевидно: правила игры меняются. Люди больше не листают ссылки — они доверяют рекомендациям ИИ.
+                  Более трех лет занимаюсь вайбкодингом: разработка сайтов, телеграмм ботов, ИИ-чаты. Когда появились нейросети, стало очевидно: правила игры для продвижения сайтов меняются. Люди больше не листают ссылки — они доверяют рекомендациям ИИ.
                 </p>
                 <p>
                   Я разработал методологию GeoForce, чтобы бренды могли системно управлять своим присутствием в ответах искусственного интеллекта, а не надеяться на удачу. Я не обещаю магию — я работаю с данными.
@@ -59,12 +59,12 @@ export function Author() {
               {/* Достижения */}
               <div className="flex flex-wrap gap-6 mb-10">
                 <div>
-                  <div className="text-2xl font-bold text-white mb-1">3+</div>
-                  <div className="text-xs uppercase tracking-wider" style={{ color: "var(--muted)" }}>лет в SEO</div>
+                  <div className="text-2xl font-bold text-white mb-1">40+</div>
+                  <div className="text-xs uppercase tracking-wider" style={{ color: "var(--muted)" }}>проектов в ИИ</div>
                 </div>
                 <div className="w-[1px] bg-white/10" />
                 <div>
-                  <div className="text-2xl font-bold text-white mb-1">разработал 3 AI-агента</div>
+                  <div className="text-2xl font-bold text-white mb-1">разработал 4 AI-агента</div>
                   <div className="text-xs uppercase tracking-wider" style={{ color: "var(--muted)" }}>для автоматизации GEO</div>
                 </div>
                 <div className="w-[1px] bg-white/10" />
