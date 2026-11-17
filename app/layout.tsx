@@ -22,14 +22,14 @@ export const metadata: Metadata = {
   keywords: ["GEO", "GEO-продвижение", "продвижение в ChatGPT", "оптимизация для ИИ", "AI SEO", "Беларусь", "GeoForce"],
   authors: [{ name: "GeoForce" }],
   creator: "GeoForce",
-  metadataBase: new URL("https://geoforce-five.vercel.app"),
+  metadataBase: new URL("https://geoforce.of.by"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "GEO-продвижение в ИИ-поиске: трафик из нейросетей под ключ | Беларусь",
     description: "Комплексное продвижение в нейросетях и ИИ-поисковиках. Настроим рекомендации вашего бренда в нейросетях под ключ. Бесплатный GEO-аудит. Первыми выведите бизнес в ответы нейросетей!",
-    url: "https://geoforce-five.vercel.app",
+    url: "https://geoforce.of.by",
     siteName: "GeoForce",
     images: [
       {
@@ -65,7 +65,7 @@ const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "GeoForce",
-  url: "https://geoforce-five.vercel.app",
+  url: "https://geoforce.of.by",
   description: "Комплексное продвижение в нейросетях и ИИ-поисковиках. Настроим рекомендации вашего бренда в нейросетях под ключ. Бесплатный GEO-аудит. Первыми выведите бизнес в ответы нейросетей!",
 };
 
@@ -73,10 +73,10 @@ const webSiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "GeoForce",
-  "url": "https://geoforce-five.vercel.app",
+  "url": "https://geoforce.of.by",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://geoforce-five.vercel.app/search?q={search_term_string}",
+    "target": "https://geoforce.of.by/search?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 };
@@ -91,7 +91,7 @@ const personJsonLd = {
   worksFor: {
     "@type": "Organization",
     "name": "GeoForce",
-    "url": "https://geoforce-five.vercel.app"
+    "url": "https://geoforce.of.by"
   },
   knowsAbout: ["GEO", "Generative Engine Optimization", "SEO", "Artificial Intelligence", "ChatGPT"],
   sameAs: [
