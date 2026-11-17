@@ -1,41 +1,46 @@
-import { Logo } from "../Logo";
-import { IconPhone, IconMail, IconTelegram } from "../icons";
+import Link from "next/link";
 
-export function Footer() {
+export default function Footer() {
   return (
-    <footer className="border-t pt-16 pb-24 md:pb-16" style={{ borderColor: "var(--border)" }}>
-      <div className="container-x grid md:grid-cols-3 gap-10 text-sm">
+    <footer className="border-t pb-20 md:pb-0" style={{ borderColor: "var(--border)" }}>
+      <div className="container-x py-10 md:py-14 flex flex-col md:flex-row gap-6 md:items-center md:justify-between">
         <div>
-          <Logo size={24} />
-          <p className="mt-4" style={{ color: "var(--muted)" }}>
-            GEO-продвижение в ответах искусственного интеллекта.
+          <div
+            className="font-semibold"
+            style={{ fontFamily: "var(--font-inter-tight), system-ui, sans-serif" }}
+          >
+            <span style={{ color: "var(--red)" }}>Geo</span>
+            <span style={{ color: "#F5F5F7" }}>Force</span>
+          </div>
+          <p className="text-sm mt-2" style={{ color: "var(--muted)" }}>
+            GEO-продвижение брендов в ответах ИИ. Беларусь.
           </p>
         </div>
-        
-        <div className="flex flex-col gap-3" style={{ color: "var(--muted)" }}>
-          <a href="#seo-vs-geo" className="hover:text-white transition-colors">Сравнение</a>
-          <a href="#metrics" className="hover:text-white transition-colors">Результаты</a>
-          <a href="#faq" className="hover:text-white transition-colors">Вопросы</a>
-        </div>
-        
-        {/* БЛОК С КОНТАКТАМИ И ИКОНКАМИ */}
-        <div className="flex flex-col gap-4" style={{ color: "var(--muted)" }}>
-          <a href="mailto:geoforce.of.by@gmail.com" className="flex items-center gap-3 hover:text-white transition-colors group">
-            <IconMail className="w-5 h-5 opacity-70 group-hover:opacity-100 group-hover:text-[var(--red)] transition-colors" />
-            <span>geoforce.of.by@gmail.com</span>
+        <nav className="flex flex-col md:items-end gap-2 text-sm" style={{ color: "var(--muted)" }}>
+          <Link href="/privacy" className="hover:text-white transition-colors">
+            Политика конфиденциальности
+          </Link>
+          <a href="mailto:geoforce.of.by@gmail.com" className="hover:text-white transition-colors">
+            geoforce.of.by@gmail.com
           </a>
-          
-          <a href="https://t.me/GeoForce_of_by" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors group">
-            <IconTelegram className="w-5 h-5 opacity-70 group-hover:opacity-100 group-hover:text-[var(--red)] transition-colors" />
-            <span>@GeoForce_of_by</span>
+          <a
+            href="https://t.me/GeoForce_of_by"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition-colors"
+          >
+            Telegram: @GeoForce_of_by
           </a>
-          
-          <a href="tel:+375296347174" className="flex items-center gap-3 hover:text-white transition-colors group">
-            <IconPhone className="w-5 h-5 opacity-70 group-hover:opacity-100 group-hover:text-[var(--red)] transition-colors" />
-            <span>+375 29 634-71-74</span>
-          </a>
-          
-          <span className="mt-4 text-xs">© {new Date().getFullYear()} GeoForce</span>
+        </nav>
+      </div>
+      <div className="border-t" style={{ borderColor: "var(--border)" }}>
+        <div
+          className="container-x py-4 flex flex-col md:flex-row gap-2 md:items-center md:justify-between text-xs mono"
+          style={{ color: "var(--muted)" }}
+        >
+          <span>© {new Date().getFullYear()} GeoForce. Все права защищены.</span>
+          {/* ЗАМЕНИТЕ на свои реквизиты: для ИП — ФИО и УНП, для юрлица — название и УНП */}
+          <span>Гапоненко П. А., УНП EB2432789</span>
         </div>
       </div>
     </footer>
