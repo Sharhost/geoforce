@@ -120,6 +120,9 @@ function ComplexityChart() {
   }, [inView]);
 
   const play = started && !reduceMotion;
+  const lineAnimate: any = play ? { pathLength: [0, 1] } : { pathLength: 1 };
+  const areaAnimate: any = play ? { opacity: [0, 1] } : { opacity: 1 };
+  const dotAnimate: any = play ? { scale: [0, 1] } : { scale: 1 };
   const { w, h } = size;
 
   const y0 = h * 0.95;
@@ -158,7 +161,7 @@ function ComplexityChart() {
           d={area}
           fill={`url(#${GRADIENT_ID})`}
           initial={false}
-          animate={play ? { opacity: [0, 1] } : { opacity: 1 }}
+          animate={areaAnimate}
           transition={{ duration: 1, delay: 0.5 }}
         />
       </svg>
@@ -177,7 +180,7 @@ function ComplexityChart() {
           strokeLinecap="round"
           style={{ filter: "blur(6px)", opacity: 0.6 }}
           initial={false}
-          animate={play ? { pathLength: [0, 1] } : { pathLength: 1 }}
+          animate={lineAnimate}
           transition={{ duration: 1.5, ease: "easeInOut" }}
         />
         <motion.path
@@ -187,7 +190,7 @@ function ComplexityChart() {
           strokeWidth="2.5"
           strokeLinecap="round"
           initial={false}
-          animate={play ? { pathLength: [0, 1] } : { pathLength: 1 }}
+          animate={lineAnimate}
           transition={{ duration: 1.5, ease: "easeInOut" }}
         />
       </svg>
@@ -197,7 +200,7 @@ function ComplexityChart() {
         className="absolute w-3 h-3 md:w-4 md:h-4 rounded-full bg-[var(--red)] shadow-[0_0_15px_var(--red)] -translate-x-1/2 translate-y-1/2 z-10"
         style={{ bottom: "5%", left: "1%" }}
         initial={false}
-        animate={play ? { scale: [0, 1] } : { scale: 1 }}
+        animate={dotAnimate}
         transition={{ delay: 1.5, type: "spring" }}
       >
         <div className="absolute inset-0 rounded-full bg-[var(--red)] animate-ping opacity-40" />
