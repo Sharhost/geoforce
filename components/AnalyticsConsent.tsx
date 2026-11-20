@@ -5,7 +5,7 @@ import Script from "next/script";
 import Link from "next/link";
 
 const CONSENT_KEY = "gf-cookie-consent";
-const METRIKA_ID = 00000000; // ЗАМЕНИТЕ на номер счётчика Яндекс.Метрики (цифры)
+const METRIKA_ID = "00000000"; // ЗАМЕНИТЕ на номер счётчика Яндекс.Метрики (цифры)
 const GA4_ID = "G-XXXXXXXXXX"; // ЗАМЕНИТЕ на Measurement ID или удалите блок GA ниже
 
 type Consent = "granted" | "denied" | null;
