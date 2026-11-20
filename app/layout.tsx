@@ -4,6 +4,7 @@ import "./globals.css";
 import { ContactModalProvider } from "@/components/ContactModalProvider";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import Footer from "@/components/sections/Footer";
+import AnalyticsConsent from "@/components/AnalyticsConsent";
 
 const interTight = Inter_Tight({
   subsets: ["latin", "cyrillic"],
@@ -27,6 +28,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  verification: {
+  google: "wCG1R910Up6_JcPLGWNBXDjHWo2La5PVJi0PF0m41rk" />",
+  yandex: "0ed05c9f727041ab",
+},
   openGraph: {
     title: "GEO-продвижение в ИИ-поиске: трафик из нейросетей под ключ | Беларусь",
     description: "Комплексное продвижение в нейросетях и ИИ-поисковиках. Настроим рекомендации вашего бренда в нейросетях под ключ. Бесплатный GEO-аудит. Первыми выведите бизнес в ответы нейросетей!",
@@ -113,6 +118,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
         <Footer />
+        <AnalyticsConsent />
       </body>
     </html>
   );
