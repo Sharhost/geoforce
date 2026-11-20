@@ -4,6 +4,9 @@ export const metadata: Metadata = {
   title: "Политика конфиденциальности | GeoForce",
   description:
     "Политика в отношении обработки персональных данных сайта geoforce.of.by (Республика Беларусь).",
+  alternates: {
+  canonical: "/privacy",
+  },
 };
 
 export default function PrivacyPage() {
